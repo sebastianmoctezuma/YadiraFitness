@@ -19,10 +19,10 @@ export default function Home() {
       <main id="contenido">
         <Hero />
         <Marquesina />
+        <Coach />
         <Retos />
         <ComoFunciona />
         <Nutricion />
-        <Coach />
         <Transformaciones items={transformaciones} />
         <Testimonios items={testimonios} />
         <Faq items={preguntas} />

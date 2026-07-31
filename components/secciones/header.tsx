@@ -48,8 +48,8 @@ export function Header() {
           onClick={() => setMenuAbierto(false)}
         >
           <Logo
-            className={`text-ink transition-all duration-500 ease-out-quart ${
-              conScroll ? "h-8 w-8" : "h-9 w-9 sm:h-10 sm:w-10"
+            className={`w-auto transition-all duration-500 ease-out-quart ${
+              conScroll ? "h-9" : "h-10 sm:h-11"
             }`}
           />
           <span className="flex items-baseline gap-1.5 leading-none">
@@ -63,7 +63,7 @@ export function Header() {
               className="hidden text-[0.65rem] font-medium uppercase tracking-[0.24em] text-ink-muted sm:inline"
               style={{ fontVariationSettings: '"wdth" 88' }}
             >
-              Fitness
+              Team
             </span>
           </span>
         </Link>

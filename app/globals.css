@@ -170,21 +170,6 @@
       0 12px 32px -12px oklch(0.165 0.008 100 / 0.22);
   }
 
-  /* La forma del logotipo vive en el canal alfa del PNG, así que se usa como
-     máscara: el color lo pone `currentColor` y el mismo archivo sirve en tinta
-     sobre fondo claro y en amarillo sobre fondo oscuro. */
-  .logo-marca {
-    background-color: currentColor;
-    mask-image: url("/logo-guerrera.png");
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    mask-position: center;
-    -webkit-mask-image: url("/logo-guerrera.png");
-    -webkit-mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-  }
-
   .glass-dark {
     background-color: color-mix(in oklab, oklch(0.165 0.008 100) 38%, transparent);
     backdrop-filter: blur(24px) saturate(160%);

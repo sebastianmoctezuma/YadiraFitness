@@ -10,7 +10,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-[88rem] gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)]">
         <div>
           <div className="flex items-center gap-3">
-            <Logo className="h-12 w-12 text-brand" />
+            <Logo className="h-14 w-auto" />
             <p className="flex items-baseline gap-1.5">
               <span
                 className="text-xl font-extrabold uppercase tracking-[-0.02em]"
@@ -22,7 +22,7 @@ export function Footer() {
                 className="text-[0.7rem] font-medium uppercase tracking-[0.24em] text-bg/50"
                 style={{ fontVariationSettings: '"wdth" 88' }}
               >
-                Fitness
+                Team
               </span>
             </p>
           </div>

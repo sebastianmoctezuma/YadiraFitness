@@ -7,9 +7,9 @@ export const site = {
   // "TEAM YADIRA" como firma y "LA GUERRERA" (#LAGUERRERA) como nombre del
   // programa. "Yadira Fitness" es un nombre de trabajo, no aparece en su
   // material.
-  nombre: "Yadira Fitness",
+  nombre: "Yadira Team",
   nombreCorto: "Yadira",
-  equipo: "Team Yadira",
+  equipo: "Yadira Team",
   programa: "La Guerrera",
   hashtag: "#LaGuerrera",
   // TODO(cliente): confirmar el número real de WhatsApp.
