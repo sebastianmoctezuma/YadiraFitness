@@ -32,6 +32,11 @@ export const metadata: Metadata = {
  * Marca el documento antes del primer paint para que el revelado por scroll
  * arranque oculto sin parpadeo. Si el JS no corre, la clase nunca se agrega y
  * todo el contenido queda visible: ninguna sección se envía en blanco.
+ *
+ * El script toca <html>, que React también controla, así que el DOM deja de
+ * coincidir con lo que React renderiza. `suppressHydrationWarning` en <html>
+ * es la salida prevista para justo este caso (es lo que hace next-themes) y
+ * solo afecta a los atributos de ese elemento, no a sus descendientes.
  */
 const marcarReveal = `document.documentElement.classList.add('js-reveal')`;
 
@@ -41,7 +46,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es-MX" className={`${archivo.variable} h-full`}>
+    <html
+      lang="es-MX"
+      className={`${archivo.variable} h-full`}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: marcarReveal }} />
       </head>
