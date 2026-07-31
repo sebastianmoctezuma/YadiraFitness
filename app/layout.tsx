@@ -16,12 +16,12 @@ const archivo = Archivo({
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.nombre} — Retos de 30, 60 y 90 días`,
+    default: `${site.nombre} — Retos de 30 y 90 días`,
     template: `%s · ${site.nombre}`,
   },
   description: site.descripcion,
   openGraph: {
-    title: `${site.nombre} — Retos de 30, 60 y 90 días`,
+    title: `${site.nombre} — Retos de 30 y 90 días`,
     description: site.descripcion,
     locale: "es_MX",
     type: "website",

@@ -46,34 +46,6 @@ export const retos: Reto[] = [
     activo: true,
   },
   {
-    slug: "reto-60-dias",
-    nombre: "Cambio",
-    tagline: "Cuando ya quieres ver diferencia en el espejo",
-    duracionDias: 60,
-    precioMXN: 2200,
-    precioAnteriorMXN: 2600,
-    modalidad: "ambas",
-    fechaInicio: "2026-09-01",
-    descripcion:
-      "Dos meses con progresión real de cargas y una dieta que se recalcula cada quince días según cómo vas respondiendo.",
-    incluye: [
-      "Plan de alimentación con recálculo quincenal",
-      "Rutina progresiva de 5 días",
-      "Seguimiento por WhatsApp cada semana",
-      "Guía de comidas fuera de casa",
-      "Ajustes ilimitados durante el reto",
-    ],
-    paraTi: [
-      "Ya entrenas pero te estancaste",
-      "Necesitas que alguien te esté encima cada semana",
-    ],
-    imagen: img("1609899517237-77d357b047cf"),
-    imagenAlt:
-      "Mujer haciendo zancadas con mancuernas frente al espejo de un gimnasio luminoso",
-    destacado: true,
-    activo: true,
-  },
-  {
     // Este es el reto real que Yadira promociona ("Reto Transformación").
     // El contenido de abajo sale de sus flyers; solo el precio sigue pendiente.
     slug: "reto-90-dias",
@@ -110,9 +82,10 @@ export const retos: Reto[] = [
       "Entrenas con sobrepeso u obesidad y necesitas progresión adaptada",
       "Buscas aumento de masa muscular con pesas, HIIT o funcional",
     ],
-    imagen: img("1518611012118-696072aa579a"),
+    imagen: img("1609899517237-77d357b047cf"),
     imagenAlt:
-      "Grupo entrenando sobre tapetes en un estudio de ladrillo con mucha luz natural",
+      "Mujer haciendo zancadas con mancuernas frente al espejo de un gimnasio luminoso",
+    destacado: true,
     activo: true,
   },
 ];
@@ -137,11 +110,11 @@ export const transformaciones: Transformacion[] = [
   {
     id: "t2",
     nombre: "Paola",
-    retoSlug: "reto-60-dias",
-    resultado: "60 días · volvió a dormir bien",
+    retoSlug: "reto-30-dias",
+    resultado: "30 días · volvió a dormir bien",
     antesSrc: img("1571732154690-f6d1c3e5178a", 900),
     despuesSrc: img("1584863265045-f9d10ca7fa61", 900),
-    alt: "Comparación de ejemplo antes y después de un reto de 60 días",
+    alt: "Comparación de ejemplo antes y después de un reto de 30 días",
   },
 ];
 
@@ -156,7 +129,7 @@ export const testimonios: Testimonio[] = [
   {
     id: "te2",
     nombre: "Paola G.",
-    reto: "Reto 60 días",
+    reto: "Reto 30 días",
     cita: "Pensé que iba a pasar hambre. Como más que antes, solo que ahora sí sé qué estoy comiendo.",
     avatarSrc: img("1438761681033-6461ffad8d80", 200),
   },

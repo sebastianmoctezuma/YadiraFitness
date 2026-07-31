@@ -1,6 +1,6 @@
 # Yadira Fitness
 
-Landing para vender retos de 30, 60 y 90 días con plan de alimentación y
+Landing para vender retos de 30 y 90 días con plan de alimentación y
 entrenamiento personalizados. El cliente paga en línea; el plan se entrega
 después por WhatsApp.
 

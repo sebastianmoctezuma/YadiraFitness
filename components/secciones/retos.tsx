@@ -28,8 +28,8 @@ export function Retos() {
             Elige cuánto te aguantas
           </h2>
           <p className="max-w-[38ch] text-base text-ink-muted">
-            Los tres retos incluyen dieta y rutina. Cambia el tiempo que
-            trabajamos juntas y qué tan lejos llega el cambio.
+            Los dos incluyen dieta y rutina. Cambia el tiempo que trabajamos
+            juntas y qué tan lejos llega el cambio.
           </p>
         </Reveal>
 

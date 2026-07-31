@@ -21,7 +21,7 @@ El público que compra y el que usa el producto son la misma persona.
 
 ## Product Purpose
 
-Vender retos de 30, 60 y 90 días con plan de alimentación y entrenamiento
+Vender retos de 30 y 90 días con plan de alimentación y entrenamiento
 personalizados. La web cobra en línea, registra la venta y avisa a Yadira; la
 entrega del plan y el seguimiento ocurren fuera del sitio, por WhatsApp. El éxito
 se mide en reservas pagadas por generación, no en tráfico.

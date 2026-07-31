@@ -144,6 +144,47 @@
       0 8px 32px -8px oklch(0.165 0.008 100 / 0.18);
   }
 
+  /* Liquid glass de la barra de navegación.
+     A diferencia de `.glass`, este suma el reflejo especular del canto superior
+     y una capa de gradiente: es lo que hace que la pastilla parezca vidrio con
+     volumen y no un rectángulo translúcido. */
+  .glass-nav {
+    /* Opacidad alta a propósito. Con el vidrio más transparente se veía muy
+       bien sobre el hero claro, pero sobre la sección oscura y sobre el CTA
+       amarillo el fondo se transparentaba tanto que los enlaces dejaban de
+       leerse. El vidrio sigue notándose por el desenfoque y el tinte. */
+    background-image: linear-gradient(
+      to bottom,
+      color-mix(in oklab, white 90%, transparent),
+      color-mix(in oklab, white 78%, transparent)
+    );
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border: 1px solid color-mix(in oklab, white 85%, transparent);
+    box-shadow:
+      /* reflejo especular en el canto superior */
+      0 1px 0 0 color-mix(in oklab, white 95%, transparent) inset,
+      /* sombra en el canto inferior: le da grosor al vidrio */
+      0 -1px 0 0 color-mix(in oklab, oklch(0.165 0.008 100) 8%, transparent) inset,
+      0 2px 6px -2px oklch(0.165 0.008 100 / 0.1),
+      0 12px 32px -12px oklch(0.165 0.008 100 / 0.22);
+  }
+
+  /* La forma del logotipo vive en el canal alfa del PNG, así que se usa como
+     máscara: el color lo pone `currentColor` y el mismo archivo sirve en tinta
+     sobre fondo claro y en amarillo sobre fondo oscuro. */
+  .logo-marca {
+    background-color: currentColor;
+    mask-image: url("/logo-guerrera.png");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-image: url("/logo-guerrera.png");
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+  }
+
   .glass-dark {
     background-color: color-mix(in oklab, oklch(0.165 0.008 100) 38%, transparent);
     backdrop-filter: blur(24px) saturate(160%);
@@ -152,9 +193,13 @@
     color: white;
   }
 
-  @supports not (backdrop-filter: blur(1px)) {
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .glass {
       background-color: oklch(1 0 0 / 0.92);
+    }
+    .glass-nav {
+      background-image: none;
+      background-color: oklch(1 0 0 / 0.95);
     }
     .glass-dark {
       background-color: oklch(0.165 0.008 100 / 0.78);
