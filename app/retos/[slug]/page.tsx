@@ -6,6 +6,7 @@ import { Footer } from "@/components/secciones/footer";
 import { Header } from "@/components/secciones/header";
 import { Boton } from "@/components/ui/boton";
 import { getReto, retos } from "@/lib/retos";
+import { etiquetaModalidad } from "@/lib/types";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -68,6 +69,21 @@ export default async function RetoPage({ params }: Props) {
               </div>
 
               <h1 className="type-h2 mt-2 text-h1 text-ink">{reto.nombre}</h1>
+
+              <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold uppercase tracking-[0.1em] text-ink-muted">
+                {reto.temporada && (
+                  <>
+                    <span className="rounded-full bg-brand px-3 py-1 text-ink">
+                      {reto.temporada}ª temporada
+                    </span>
+                    <span aria-hidden className="text-line">
+                      ·
+                    </span>
+                  </>
+                )}
+                <span>{etiquetaModalidad[reto.modalidad]}</span>
+              </p>
+
               <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-ink-muted">
                 {reto.descripcion}
               </p>

@@ -21,6 +21,9 @@ export type Reto = {
   /** Fecha ISO (YYYY-MM-DD) en que arranca la generación actual. */
   fechaInicio: string;
   descripcion: string;
+  /** Número de temporada/generación. Los flyers la anuncian como "3ª temporada". */
+  temporada?: number;
+  modalidad: "presencial" | "online" | "ambas";
   incluye: string[];
   /** Para quién es y para quién no. Baja las devoluciones. */
   paraTi: string[];
@@ -49,6 +52,12 @@ export type Testimonio = {
   reto: string;
   cita: string;
   avatarSrc: string;
+};
+
+export const etiquetaModalidad: Record<Reto["modalidad"], string> = {
+  presencial: "Presencial",
+  online: "En línea",
+  ambas: "Presencial o en línea",
 };
 
 export type PreguntaFrecuente = {

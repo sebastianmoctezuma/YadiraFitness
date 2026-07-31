@@ -26,6 +26,7 @@ export const retos: Reto[] = [
     tagline: "Para dejar de empezar los lunes",
     duracionDias: 30,
     precioMXN: 1200,
+    modalidad: "ambas",
     fechaInicio: "2026-09-01",
     descripcion:
       "Un mes para ordenar lo básico: qué comes, cuánto te mueves y a qué hora duermes. Sin restricciones absurdas ni alimentos prohibidos.",
@@ -51,6 +52,7 @@ export const retos: Reto[] = [
     duracionDias: 60,
     precioMXN: 2200,
     precioAnteriorMXN: 2600,
+    modalidad: "ambas",
     fechaInicio: "2026-09-01",
     descripcion:
       "Dos meses con progresión real de cargas y una dieta que se recalcula cada quince días según cómo vas respondiendo.",
@@ -72,25 +74,41 @@ export const retos: Reto[] = [
     activo: true,
   },
   {
+    // Este es el reto real que Yadira promociona ("Reto Transformación").
+    // El contenido de abajo sale de sus flyers; solo el precio sigue pendiente.
     slug: "reto-90-dias",
     nombre: "Transformación",
     tagline: "El que de verdad cambia el cuerpo",
     duracionDias: 90,
+    // TODO(cliente): PRECIO SIN CONFIRMAR. El flyer anuncia "inscripción $500",
+    // que puede ser solo la inscripción y no el total. No conectar Stripe hasta
+    // aclararlo.
     precioMXN: 2900,
+    temporada: 3,
+    modalidad: "ambas",
+    // TODO(cliente): la 3ª temporada arrancó el 7 de julio. Falta la fecha de
+    // la siguiente generación.
     fechaInicio: "2026-09-01",
     descripcion:
-      "Tres meses es el tiempo mínimo honesto para un cambio que se sostiene. Aquí no solo bajas: aprendes a comer sin plan para cuando el reto se acabe.",
+      "Tres meses es el tiempo mínimo honesto para un cambio que se sostiene. Entrenas conmigo presencial o en línea, con evaluación al arrancar y mediciones durante todo el reto.",
     incluye: [
-      "Plan de alimentación con recálculo quincenal",
-      "Rutina progresiva de 5 días con cambio de bloque cada mes",
-      "Videollamada de arranque y de cierre",
-      "Seguimiento por WhatsApp cada semana",
-      "Protocolo de mantenimiento al terminar",
-      "Ajustes ilimitados durante el reto",
+      "Plan de comidas personalizado",
+      "Rutina de entrenamiento personalizada",
+      "Corrección de ejercicios y técnica",
+      "Mediciones y seguimiento",
+      "Evaluación inicial",
+      "Entrenamiento presencial o en línea",
+      "Suplementación de acuerdo a tu meta",
+      // ⚠️ REVISAR ANTES DE PUBLICAR: "detox" y "limpieza de hígado graso"
+      // aparecen en su flyer, pero el hígado graso es un diagnóstico médico y
+      // ofrecer tratarlo es una afirmación de salud. Su certificación es en
+      // nutrición fitness y suplementación deportiva, no en medicina. Consultar
+      // con ella antes de dejarlo en la página.
     ],
     paraTi: [
       "Quieres un cambio que aguante después del reto",
-      "Estás dispuesta a sostener tres meses seguidos",
+      "Entrenas con sobrepeso u obesidad y necesitas progresión adaptada",
+      "Buscas aumento de masa muscular con pesas, HIIT o funcional",
     ],
     imagen: img("1518611012118-696072aa579a"),
     imagenAlt:

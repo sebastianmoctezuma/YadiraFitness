@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/reveal";
 import { retos } from "@/lib/retos";
+import { etiquetaModalidad } from "@/lib/types";
 
 const precio = (mxn: number) =>
   new Intl.NumberFormat("es-MX", {
@@ -68,6 +69,10 @@ export function Retos() {
                   </p>
                   <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-ink-muted">
                     {reto.incluye.length} cosas incluidas
+                    <span aria-hidden className="mx-2 text-line">
+                      ·
+                    </span>
+                    {etiquetaModalidad[reto.modalidad]}
                   </p>
                 </div>
 
