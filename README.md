@@ -1,14 +1,18 @@
-# Yadira Fitness
+# Yadira Team
 
-Landing para vender retos de 30 y 90 días con plan de alimentación y
-entrenamiento personalizados. El cliente paga en línea; el plan se entrega
-después por WhatsApp.
+Landing de los retos de 30 y 90 días: gym privado exclusivo de mujeres,
+entrenamiento personal presencial y en línea, con cocina propia para elaborar
+la dieta.
 
 ## Estado
 
-**Plantilla de frontend.** Todo el contenido es de relleno y las fotos son de
-Unsplash, a la espera del material de la clienta. Ni Stripe ni Supabase están
-conectados todavía.
+**Frontend, sin cobros todavía.** Los textos salen de los flyers de Yadira; no
+hay testimonios ni resultados porque aún no existen. Precio y fecha de inicio
+están sin definir a propósito, así que no se publican: son campos opcionales
+del modelo y aparecen solos en cuanto se llenen. Mientras tanto todos los CTA
+llevan a WhatsApp.
+
+Ni Stripe ni Supabase están conectados.
 
 ## Correr el proyecto
 
@@ -18,6 +22,23 @@ npm run dev      # http://localhost:3000
 npm run build    # build de producción
 npm run lint
 ```
+
+## Despliegue
+
+Vercel, conectado a `main`: cada push despliega.
+
+Vercel bloquea el deploy si el correo del autor del commit no es válido. Si
+git nunca se configuró en la máquina, inventa uno a partir del nombre del
+equipo (`usuario@MacBook-de-Alguien.local`) y el deploy falla con
+*Deployment Blocked*. Se arregla una sola vez:
+
+```bash
+git config --global user.email "el-correo-de-tu-cuenta-github"
+git config --global user.name "Tu Nombre"
+```
+
+Los commits anteriores al arreglo conservan el correo inválido: si redespliegas
+uno de ellos desde el panel, volverá a bloquearse.
 
 ## Cómo está organizado
 
