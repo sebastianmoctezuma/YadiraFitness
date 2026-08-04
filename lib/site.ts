@@ -7,8 +7,9 @@ export const site = {
   programa: "La Guerrera",
   hashtag: "#LaGuerrera",
   temporada: "3ª temporada 2026",
-  // TODO(cliente): confirmar el número real de WhatsApp.
-  whatsapp: "5215500000000",
+  // Tentativo, a confirmar con Yadira: +52 899 873 4804.
+  // wa.me lo quiere en formato internacional, sin "+", espacios ni guiones.
+  whatsapp: "528998734804",
   instagram: "https://instagram.com/la_guerrera_yadira",
   instagramUsuario: "@la_guerrera_yadira",
   tiktok: "https://tiktok.com/@yadirahernandez1984",
