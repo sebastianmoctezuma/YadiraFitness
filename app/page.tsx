@@ -1,3 +1,4 @@
+import { BarraMovil } from "@/components/secciones/barra-movil";
 import { Coach } from "@/components/secciones/coach";
 import { CtaFinal } from "@/components/secciones/cta-final";
 import { Entrenamientos } from "@/components/secciones/entrenamientos";
@@ -17,7 +18,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main id="contenido">
+      <main id="contenido" className="pb-24 lg:pb-0">
         <Hero />
         <Marquesina />
         <Coach />
@@ -28,6 +29,7 @@ export default function Home() {
         <CtaFinal />
       </main>
       <Footer />
+      <BarraMovil />
     </>
   );
 }

@@ -70,7 +70,9 @@ export function Retos() {
                       className="object-cover transition-transform duration-500 ease-out-quart group-hover:scale-105"
                     />
                   </div>
-                  <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-[0.1em] text-ink uppercase transition-colors group-hover:text-brand-text">
+                  {/* En móvil es un botón de ancho completo: como texto suelto
+                      no se leía como algo que se puede tocar. */}
+                  <span className="flex min-h-12 w-full items-center justify-center gap-1.5 rounded-full border border-ink/20 text-xs font-bold tracking-[0.1em] text-ink uppercase transition-colors group-hover:border-ink sm:min-h-0 sm:w-auto sm:border-0 sm:group-hover:text-brand-text">
                     Ver el reto
                     <span
                       aria-hidden

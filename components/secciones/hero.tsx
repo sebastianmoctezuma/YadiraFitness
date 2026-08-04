@@ -25,11 +25,14 @@ export function Hero() {
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <Boton href="#retos">Ver los retos</Boton>
+            {/* Oculto en móvil: ahí la barra fija ya ofrece esta misma acción
+                y quedaban dos botones idénticos en la misma pantalla. */}
             <Boton
               href={whatsappUrl(
                 `Hola ${site.nombreCorto}, quiero reservar mi cupo.`,
               )}
               variante="secundario"
+              className="hidden lg:inline-flex"
             >
               Reservar mi cupo
             </Boton>

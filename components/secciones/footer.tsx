@@ -41,7 +41,7 @@ export function Footer() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-sm text-bg/80 transition-colors hover:text-brand"
+                  className="inline-flex min-h-11 items-center text-sm text-bg/80 transition-colors hover:text-brand"
                 >
                   {item.label}
                 </Link>
@@ -59,7 +59,7 @@ export function Footer() {
               <li key={red.red}>
                 <a
                   href={red.href}
-                  className="text-bg/80 transition-colors hover:text-brand"
+                  className="inline-flex min-h-11 items-center text-bg/80 transition-colors hover:text-brand"
                 >
                   {red.red} <span className="text-bg/60">{red.usuario}</span>
                 </a>
@@ -70,7 +70,7 @@ export function Footer() {
                 href={whatsappUrl(
                   `Hola ${site.nombreCorto}, quiero reservar mi cupo.`,
                 )}
-                className="text-bg/80 transition-colors hover:text-brand"
+                className="inline-flex min-h-11 items-center text-bg/80 transition-colors hover:text-brand"
               >
                 WhatsApp
               </a>

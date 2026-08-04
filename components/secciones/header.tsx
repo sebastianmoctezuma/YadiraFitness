@@ -102,7 +102,7 @@ export function Header() {
             aria-expanded={menuAbierto}
             aria-controls="menu-movil"
             aria-label={menuAbierto ? "Cerrar menú" : "Abrir menú"}
-            className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-full border border-ink/15 transition-colors hover:bg-ink/5 lg:hidden"
+            className="flex h-11 w-11 flex-col items-center justify-center gap-[5px] rounded-full border border-ink/15 transition-colors hover:bg-ink/5 lg:hidden"
           >
             <span
               className={`block h-[2px] w-4 bg-ink transition-transform duration-300 ease-out-quart ${

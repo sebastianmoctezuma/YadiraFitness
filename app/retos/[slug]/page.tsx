@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BarraMovil } from "@/components/secciones/barra-movil";
 import { Footer } from "@/components/secciones/footer";
 import { Header } from "@/components/secciones/header";
 import { Boton } from "@/components/ui/boton";
@@ -31,11 +32,11 @@ export default async function RetoPage({ params }: Props) {
   return (
     <>
       <Header />
-      <main className="mesh-amarillo pt-28 pb-24 sm:pt-36">
+      <main className="mesh-amarillo pt-28 pb-28 sm:pt-36 lg:pb-24">
         <div className="mx-auto max-w-[88rem] px-5 sm:px-8">
           <Link
             href="/#retos"
-            className="text-sm font-medium text-ink-muted transition-colors hover:text-ink"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-ink-muted transition-colors hover:text-ink"
           >
             ← Todos los retos
           </Link>
@@ -120,6 +121,7 @@ export default async function RetoPage({ params }: Props) {
         </div>
       </main>
       <Footer />
+      <BarraMovil />
     </>
   );
 }
