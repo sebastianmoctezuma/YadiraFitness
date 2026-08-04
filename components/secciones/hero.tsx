@@ -29,19 +29,21 @@ export function Hero() {
             <Boton href="#retos" className="w-full sm:w-auto">
               Ver los retos
             </Boton>
-            {/* Oculto en móvil: ahí la barra fija ya ofrece esta misma acción y
-                quedaban dos botones idénticos en la misma pantalla.
-                Va en un envoltorio porque `hidden` sobre el propio botón no
-                gana al `inline-flex` de su clase base: las dos son utilidades
-                de display y el orden lo decide la hoja de estilos. */}
+            {/* Se llama por lo que hace, no "Reservar mi cupo": ese texto lleva
+                siempre al catálogo, y aquí abriría WhatsApp. Dos botones con el
+                mismo rótulo y distinto destino confunden.
+                Oculto en móvil, donde la barra fija ya ocupa ese lugar. Va en un
+                envoltorio porque `hidden` sobre el propio botón no gana al
+                `inline-flex` de su clase base: las dos son utilidades de display
+                y el orden lo decide la hoja de estilos. */}
             <span className="hidden lg:block">
               <Boton
                 href={whatsappUrl(
-                  `Hola ${site.nombreCorto}, quiero reservar mi cupo.`,
+                  `Hola ${site.nombreCorto}, tengo una duda sobre los retos.`,
                 )}
                 variante="secundario"
               >
-                Reservar mi cupo
+                Escríbeme por WhatsApp
               </Boton>
             </span>
           </div>
