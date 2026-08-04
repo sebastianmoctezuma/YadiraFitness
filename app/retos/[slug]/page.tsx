@@ -31,26 +31,41 @@ export default async function RetoPage({ params }: Props) {
   return (
     <>
       <Header />
-      <main className="pt-32 pb-24 sm:pt-40">
-        <div className="mx-auto max-w-[84rem] px-5 sm:px-8">
+      <main className="mesh-amarillo pt-28 pb-24 sm:pt-36">
+        <div className="mx-auto max-w-[88rem] px-5 sm:px-8">
           <Link
             href="/#retos"
-            className="text-sm text-ink-muted transition-colors hover:text-ink"
+            className="text-sm font-medium text-ink-muted transition-colors hover:text-ink"
           >
             ← Todos los retos
           </Link>
 
           <div className="mt-8 grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:gap-20">
             <div>
-              <p className="type-etiqueta text-brand-text">
-                {reto.duracionDias} días
-                {reto.temporada ? ` · ${reto.temporada}ª temporada` : ""}
+              <div className="flex items-baseline gap-3">
+                <span
+                  className="type-display text-[clamp(4rem,11vw,7rem)] text-ink"
+                  style={{ fontVariationSettings: '"wdth" 118' }}
+                >
+                  {reto.duracionDias}
+                </span>
+                <span className="text-sm font-bold tracking-[0.14em] text-ink-muted uppercase">
+                  días
+                </span>
+              </div>
+
+              <h1 className="type-h2 mt-2 text-h1 text-ink">{reto.nombre}</h1>
+
+              <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-semibold tracking-[0.1em] text-ink-muted uppercase">
+                {reto.temporada && (
+                  <span className="rounded-full bg-brand px-3 py-1 text-ink">
+                    {reto.temporada}ª temporada
+                  </span>
+                )}
+                <span>{etiquetaModalidad[reto.modalidad]}</span>
               </p>
 
-              <h1 className="type-display mt-5 text-h1 text-ink">
-                {reto.nombre}
-              </h1>
-              <p className="mt-6 max-w-[52ch] text-lg leading-[1.8] text-ink-muted">
+              <p className="mt-6 max-w-[54ch] text-lg leading-relaxed text-ink-muted">
                 {reto.descripcion}
               </p>
 
@@ -58,10 +73,10 @@ export default async function RetoPage({ params }: Props) {
               <ul className="mt-6 border-t border-line">
                 {incluye.map((item) => (
                   <li key={item.titulo} className="border-b border-line py-5">
-                    <h3 className="text-base font-medium text-ink">
+                    <h3 className="text-base font-bold text-ink">
                       {item.titulo}
                     </h3>
-                    <p className="mt-1.5 max-w-[52ch] text-[0.95rem] leading-relaxed text-ink-muted">
+                    <p className="mt-1.5 max-w-[54ch] text-[0.95rem] leading-relaxed text-ink-muted">
                       {item.detalle}
                     </p>
                   </li>
@@ -70,7 +85,7 @@ export default async function RetoPage({ params }: Props) {
             </div>
 
             <div>
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-suave)]">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl">
                 <Image
                   src={reto.imagen}
                   alt={reto.imagenAlt}
@@ -81,22 +96,23 @@ export default async function RetoPage({ params }: Props) {
                 />
               </div>
 
-              <div className="mt-6 rounded-[var(--radius-suave)] bg-surface p-8">
-                <p className="type-etiqueta text-ink-muted">
-                  {etiquetaModalidad[reto.modalidad]}
-                </p>
-                <p className="mt-4 text-[0.95rem] leading-[1.75] text-ink-muted">
+              <div className="glass mt-6 rounded-3xl p-7">
+                <h2 className="text-base font-bold text-ink">
+                  Reserva tu cupo
+                </h2>
+                <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-muted">
                   El precio y la fecha de arranque de la siguiente generación se
-                  confirman por WhatsApp. Los cupos son limitados.
+                  confirman por WhatsApp. Los cupos son limitados porque el
+                  entrenamiento es personal.
                 </p>
 
                 <Boton
                   href={whatsappUrl(
                     `Hola ${site.nombreCorto}, me interesa el ${reto.nombre} de ${reto.duracionDias} días.`,
                   )}
-                  className="mt-7 w-full"
+                  className="mt-6 w-full"
                 >
-                  Reservar mi cupo
+                  Escribir por WhatsApp
                 </Boton>
               </div>
             </div>

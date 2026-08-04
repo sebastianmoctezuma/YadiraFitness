@@ -38,8 +38,8 @@ export function Header() {
           es lo que la hace legible sobre cualquier sección; al hacer scroll
           solo se ciñe un poco y gana sombra. */}
       {/* `relative z-10` mantiene la pastilla por encima del panel del menú.
-          Sin esto el panel se pintaba sobre el botón de cerrar y el menú se
-          quedaba abierto sin manera de salir en móvil. */}
+          Sin esto el panel se pinta sobre el botón de cerrar y el menú se queda
+          abierto sin manera de salir en móvil. */}
       <div
         className={`glass-nav relative z-10 mx-auto flex max-w-[84rem] items-center justify-between gap-4 rounded-full transition-all duration-500 ease-out-quart ${
           conScroll ? "px-3 py-2 sm:px-4" : "px-4 py-2.5 sm:px-6 sm:py-3"
@@ -51,8 +51,7 @@ export function Header() {
           onClick={() => setMenuAbierto(false)}
         >
           {/* Vidrio oscuro bajo el logo: sobre el vidrio claro del navbar el
-              amarillo se lavaba. Un fondo oscuro translúcido lo devuelve a su
-              color sin recolorear el archivo. */}
+              amarillo se lavaba. */}
           <span
             className={`glass-logo flex shrink-0 items-center justify-center rounded-full transition-all duration-500 ease-out-quart ${
               conScroll ? "h-10 w-10" : "h-11 w-11 sm:h-12 sm:w-12"
@@ -65,7 +64,7 @@ export function Header() {
             />
           </span>
           <span
-            className="text-base font-extrabold uppercase tracking-[-0.02em] text-ink sm:text-lg"
+            className="text-base font-extrabold tracking-[-0.02em] text-ink uppercase sm:text-lg"
             style={{ fontVariationSettings: '"wdth" 112' }}
           >
             Yadira

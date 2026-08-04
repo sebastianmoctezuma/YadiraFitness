@@ -9,6 +9,10 @@ import { Incluye } from "@/components/secciones/incluye";
 import { Marquesina } from "@/components/secciones/marquesina";
 import { Retos } from "@/components/secciones/retos";
 
+/**
+ * Orden de lectura: quién es → qué vende → qué incluye → cómo se entrena →
+ * dónde → reservar. Cada tema aparece una sola vez.
+ */
 export default function Home() {
   return (
     <>

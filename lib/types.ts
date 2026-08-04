@@ -12,20 +12,17 @@ export type Reto = {
   slug: string;
   nombre: string;
   duracionDias: 30 | 90;
-  /** Gancho corto para el catálogo. */
   tagline: string;
   descripcion: string;
   /**
-   * Precio y fecha de inicio siguen sin definirse, así que son opcionales y
-   * la interfaz no muestra nada cuando faltan. Publicar un precio provisional
-   * es peor que no publicar ninguno.
+   * Precio y fecha de inicio siguen sin definirse, así que son opcionales y la
+   * interfaz no muestra nada cuando faltan. Publicar un precio provisional es
+   * peor que no publicar ninguno.
    */
   precioMXN?: number;
   fechaInicio?: string;
-  /** Número de generación, si aplica. */
   temporada?: number;
   modalidad: "presencial" | "online" | "ambas";
-  incluye: string[];
   imagen: string;
   imagenAlt: string;
   destacado?: boolean;
@@ -38,8 +35,8 @@ export const etiquetaModalidad: Record<Reto["modalidad"], string> = {
   ambas: "Presencial y en línea",
 };
 
-/** Tipo de entrenamiento que se ofrece. */
-export type TipoEntrenamiento = {
+/** Una prestación del programa o un tipo de entrenamiento. */
+export type Punto = {
   titulo: string;
   detalle: string;
 };

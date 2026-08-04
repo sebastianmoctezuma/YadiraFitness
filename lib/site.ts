@@ -1,5 +1,5 @@
 /**
- * Configuración de la marca. Todo lo de aquí sale de los flyers de Yadira.
+ * Configuración de la marca. Todo sale de los flyers de Yadira.
  */
 export const site = {
   nombre: "Yadira Team",
@@ -26,5 +26,5 @@ export const navegacion = [
   { href: "#coach", label: "La coach" },
   { href: "#retos", label: "Retos" },
   { href: "#incluye", label: "Qué incluye" },
-  { href: "#estudio", label: "El estudio" },
+  { href: "#estudio", label: "El gym" },
 ] as const;
