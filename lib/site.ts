@@ -25,6 +25,7 @@ export const whatsappUrl = (mensaje: string) =>
 export const navegacion = [
   { href: "#coach", label: "La coach" },
   { href: "#retos", label: "Retos" },
+  { href: "#resultados", label: "Resultados" },
   { href: "#incluye", label: "Qué incluye" },
   { href: "#estudio", label: "El gym" },
 ] as const;

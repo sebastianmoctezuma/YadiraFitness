@@ -9,6 +9,7 @@ import { Hero } from "@/components/secciones/hero";
 import { Incluye } from "@/components/secciones/incluye";
 import { Marquesina } from "@/components/secciones/marquesina";
 import { Retos } from "@/components/secciones/retos";
+import { Transformaciones } from "@/components/secciones/transformaciones";
 
 /**
  * Orden de lectura: quién es → qué vende → qué incluye → cómo se entrena →
@@ -23,6 +24,7 @@ export default function Home() {
         <Marquesina />
         <Coach />
         <Retos />
+        <Transformaciones />
         <Incluye />
         <Entrenamientos />
         <Estudio />

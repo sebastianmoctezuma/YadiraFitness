@@ -101,6 +101,20 @@ export const entrenamientos: Punto[] = [
   },
 ];
 
+/**
+ * Antes y después de clientas.
+ *
+ * Cada archivo ya viene compuesto (las etapas y, en varias, la báscula), así
+ * que no hace falta comparador: basta con mostrarlos.
+ *
+ * ⚠️ Son personas identificables. Antes de publicar hace falta consentimiento
+ * por escrito de cada una para uso comercial de su imagen.
+ */
+export const transformaciones = Array.from({ length: 16 }, (_, i) => ({
+  src: `/transformaciones/t${String(i + 1).padStart(2, "0")}.webp`,
+  alt: `Antes y después de una clienta tras completar el reto (${i + 1} de 16)`,
+}));
+
 /** Lo que hace distinto al gym, según el flyer de temporada. */
 export const gym: Punto[] = [
   {
