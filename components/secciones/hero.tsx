@@ -4,7 +4,7 @@ import { site, whatsappUrl } from "@/lib/site";
 
 export function Hero() {
   return (
-    <section className="mesh-amarillo relative overflow-hidden bg-bg pt-32 pb-16 sm:pt-36 sm:pb-24">
+    <section className="mesh-amarillo relative overflow-hidden bg-bg pt-28 pb-12 sm:pt-32 sm:pb-16">
       <div className="relative mx-auto grid max-w-[88rem] items-center gap-12 px-5 sm:px-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-text">
@@ -48,9 +48,9 @@ export function Hero() {
         </div>
 
         <div className="relative">
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl">
+          <div className="deriva-scroll relative aspect-[4/5] w-full overflow-hidden rounded-3xl">
             <Image
-              src="/coach-frontal.jpg"
+              src="/coach-frontal.webp"
               alt="Yadira, entrenadora personal, en el gym"
               fill
               priority

@@ -5,14 +5,14 @@ export function Incluye() {
   return (
     <section
       id="incluye"
-      className="scroll-mt-24 border-y border-line bg-surface py-24 sm:py-32"
+      className="scroll-mt-24 border-y border-line bg-surface py-16 sm:py-24"
     >
       <div className="mx-auto max-w-[88rem] px-5 sm:px-8">
         <Reveal className="max-w-[30ch]">
           <h2 className="type-h2 text-h2 text-ink">Qué incluye tu reto</h2>
         </Reveal>
 
-        <ul className="mt-14 grid gap-x-10 gap-y-11 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 grid gap-x-10 gap-y-11 sm:grid-cols-2 lg:grid-cols-3">
           {incluye.map((item, i) => (
             <Reveal
               as="li"

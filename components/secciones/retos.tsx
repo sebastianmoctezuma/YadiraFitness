@@ -10,7 +10,7 @@ import { etiquetaModalidad } from "@/lib/types";
  */
 export function Retos() {
   return (
-    <section id="retos" className="scroll-mt-24 bg-bg py-24 sm:py-32">
+    <section id="retos" className="scroll-mt-24 bg-bg py-16 sm:py-24">
       <div className="mx-auto max-w-[88rem] px-5 sm:px-8">
         <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <h2 className="type-h2 max-w-[16ch] text-h1 text-ink">
@@ -22,7 +22,7 @@ export function Retos() {
           </p>
         </Reveal>
 
-        <ul className="mt-14 border-t border-line">
+        <ul className="mt-10 border-t border-line">
           {retos.map((reto, i) => (
             <Reveal as="li" key={reto.slug} delay={i * 100}>
               <Link

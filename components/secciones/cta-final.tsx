@@ -7,7 +7,7 @@ import { site, whatsappUrl } from "@/lib/site";
  */
 export function CtaFinal() {
   return (
-    <section className="bg-brand py-24 sm:py-32">
+    <section className="bg-brand py-16 sm:py-24">
       <div className="mx-auto max-w-[88rem] px-5 text-center sm:px-8">
         <p className="text-xs font-bold tracking-[0.18em] text-ink/75 uppercase">
           {site.temporada}

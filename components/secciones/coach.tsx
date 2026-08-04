@@ -6,7 +6,7 @@ export function Coach() {
   return (
     <section
       id="coach"
-      className="mesh-amarillo-oscuro scroll-mt-24 bg-ink py-24 text-bg sm:py-32"
+      className="mesh-amarillo-oscuro scroll-mt-24 bg-ink py-16 text-bg sm:py-24"
     >
       <div className="mx-auto grid max-w-[88rem] items-center gap-14 px-5 sm:px-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-20">
         <Reveal>
@@ -15,7 +15,7 @@ export function Coach() {
           <div className="relative mx-auto w-full max-w-[30rem]">
             <div className="relative aspect-[3/4] w-[78%] overflow-hidden rounded-3xl">
               <Image
-                src="/coach-retrato.jpg"
+                src="/coach-retrato.webp"
                 alt="Yadira en el gym"
                 fill
                 sizes="(max-width: 1024px) 70vw, 30vw"
@@ -24,7 +24,7 @@ export function Coach() {
             </div>
             <div className="absolute right-0 bottom-[-2.5rem] aspect-square w-[46%] overflow-hidden rounded-3xl border-4 border-ink">
               <Image
-                src="/coach-estudio.jpg"
+                src="/coach-estudio.webp"
                 alt="Yadira entrenando"
                 fill
                 sizes="(max-width: 1024px) 40vw, 18vw"

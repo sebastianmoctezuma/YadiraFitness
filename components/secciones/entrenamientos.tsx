@@ -7,7 +7,7 @@ import { entrenamientos } from "@/lib/retos";
  */
 export function Entrenamientos() {
   return (
-    <section className="bg-bg py-24 sm:py-32">
+    <section className="bg-bg py-16 sm:py-24">
       <div className="mx-auto grid max-w-[88rem] gap-12 px-5 sm:px-8 lg:grid-cols-[minmax(0,0.65fr)_minmax(0,1fr)] lg:gap-20">
         <Reveal>
           <h2 className="type-h2 max-w-[14ch] text-h2 text-ink">

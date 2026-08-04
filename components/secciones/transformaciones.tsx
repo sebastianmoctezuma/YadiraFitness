@@ -46,7 +46,7 @@ export function Transformaciones() {
   return (
     <section
       id="resultados"
-      className="scroll-mt-24 overflow-hidden border-y border-line bg-surface py-24 sm:py-32"
+      className="scroll-mt-24 overflow-hidden border-y border-line bg-surface py-16 sm:py-24"
     >
       <div className="mx-auto max-w-[88rem] px-5 sm:px-8">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
@@ -92,7 +92,7 @@ export function Transformaciones() {
         tabIndex={0}
         role="region"
         aria-label="Transformaciones de clientas"
-        className="mt-12 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="mt-8 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         <ul className="flex snap-x snap-mandatory gap-4 px-5 pb-4 sm:px-8">
           {transformaciones.map((item, i) => (
@@ -100,14 +100,14 @@ export function Transformaciones() {
               key={item.src}
               className="w-[78vw] max-w-[26rem] shrink-0 snap-center sm:w-[22rem] lg:w-[24rem]"
             >
-              <div className="relative aspect-square w-full overflow-hidden rounded-3xl bg-bg">
+              <div className="group relative aspect-square w-full overflow-hidden rounded-3xl bg-bg">
                 <Image
                   src={item.src}
                   alt={item.alt}
                   fill
                   sizes="(max-width: 640px) 78vw, 24rem"
                   loading={i < 2 ? "eager" : "lazy"}
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out-quart group-hover:scale-[1.04]"
                 />
               </div>
             </li>
@@ -117,9 +117,8 @@ export function Transformaciones() {
 
       <div className="mx-auto max-w-[88rem] px-5 sm:px-8">
         <p className="mt-4 max-w-[60ch] text-sm text-ink-muted">
-          Resultados reales de clientas del programa, publicados con su permiso.
-          Cada cuerpo responde distinto: estas fotos no son una promesa de
-          resultado.
+          Resultados reales de clientas del programa, publicados con su
+          permiso.
         </p>
       </div>
     </section>

@@ -5,7 +5,7 @@ export function Estudio() {
   return (
     <section
       id="estudio"
-      className="mesh-amarillo scroll-mt-24 border-y border-line bg-surface py-24 sm:py-32"
+      className="mesh-amarillo scroll-mt-24 border-y border-line bg-surface py-16 sm:py-24"
     >
       <div className="mx-auto max-w-[88rem] px-5 sm:px-8">
         <Reveal className="max-w-[30ch]">
@@ -14,7 +14,7 @@ export function Estudio() {
           </h2>
         </Reveal>
 
-        <ul className="mt-14 grid gap-x-10 gap-y-11 sm:grid-cols-3">
+        <ul className="mt-10 grid gap-x-10 gap-y-11 sm:grid-cols-3">
           {gym.map((item, i) => (
             <Reveal
               as="li"

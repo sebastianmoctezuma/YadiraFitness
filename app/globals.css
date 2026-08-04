@@ -232,6 +232,22 @@
     color: white;
   }
 
+  /* El desenfoque de fondo se recalcula en cada cuadro de scroll, y la barra
+     va fija: en un teléfono es de lo más caro de la página. Un radio menor se
+     ve prácticamente igual a ese tamaño y quita bastante trabajo de GPU. */
+  @media (max-width: 1023px) {
+    .glass-nav,
+    .glass {
+      backdrop-filter: blur(12px) saturate(160%);
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
+    }
+    .glass-logo,
+    .glass-dark {
+      backdrop-filter: blur(10px) saturate(150%);
+      -webkit-backdrop-filter: blur(10px) saturate(150%);
+    }
+  }
+
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .glass {
       background-color: oklch(1 0 0 / 0.92);
@@ -259,7 +275,9 @@
 
 .js-reveal [data-reveal] {
   opacity: 0;
-  transform: translateY(18px);
+  /* Sube y entra ligeramente escalado: el cambio de escala es lo que hace que
+     la entrada se sienta viva y no un simple desplazamiento. */
+  transform: translateY(20px) scale(0.985);
 }
 
 .js-reveal [data-reveal][data-revealed="true"] {
@@ -283,6 +301,29 @@
 }
 
 /* Marquesina de la barra de confianza */
+/* Movimiento ligado al scroll, sin una sola línea de JavaScript ni escuchas de
+   evento: lo calcula el compositor. Donde el navegador no lo soporta no pasa
+   nada, porque el revelado de arriba ya deja el contenido visible. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes deriva {
+      from {
+        transform: translateY(1.75rem);
+      }
+      to {
+        transform: translateY(-1.75rem);
+      }
+    }
+
+    .deriva-scroll {
+      animation: deriva linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+      will-change: transform;
+    }
+  }
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);
