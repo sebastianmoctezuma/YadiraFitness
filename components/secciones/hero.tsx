@@ -23,19 +23,27 @@ export function Hero() {
             personal, presencial o en línea.
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <Boton href="#retos">Ver los retos</Boton>
-            {/* Oculto en móvil: ahí la barra fija ya ofrece esta misma acción
-                y quedaban dos botones idénticos en la misma pantalla. */}
-            <Boton
-              href={whatsappUrl(
-                `Hola ${site.nombreCorto}, quiero reservar mi cupo.`,
-              )}
-              variante="secundario"
-              className="hidden lg:inline-flex"
-            >
-              Reservar mi cupo
+          {/* En móvil los botones van a ancho completo: así quedan alineados
+              con el bloque de texto en vez de flotar desiguales a la izquierda. */}
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <Boton href="#retos" className="w-full sm:w-auto">
+              Ver los retos
             </Boton>
+            {/* Oculto en móvil: ahí la barra fija ya ofrece esta misma acción y
+                quedaban dos botones idénticos en la misma pantalla.
+                Va en un envoltorio porque `hidden` sobre el propio botón no
+                gana al `inline-flex` de su clase base: las dos son utilidades
+                de display y el orden lo decide la hoja de estilos. */}
+            <span className="hidden lg:block">
+              <Boton
+                href={whatsappUrl(
+                  `Hola ${site.nombreCorto}, quiero reservar mi cupo.`,
+                )}
+                variante="secundario"
+              >
+                Reservar mi cupo
+              </Boton>
+            </span>
           </div>
         </div>
 

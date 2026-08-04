@@ -70,9 +70,9 @@ export function Retos() {
                       className="object-cover transition-transform duration-500 ease-out-quart group-hover:scale-105"
                     />
                   </div>
-                  {/* En móvil es un botón de ancho completo: como texto suelto
-                      no se leía como algo que se puede tocar. */}
-                  <span className="flex min-h-12 w-full items-center justify-center gap-1.5 rounded-full border border-ink/20 text-xs font-bold tracking-[0.1em] text-ink uppercase transition-colors group-hover:border-ink sm:min-h-0 sm:w-auto sm:border-0 sm:group-hover:text-brand-text">
+                  {/* Botón de verdad, con liquid glass, y a ancho completo en
+                      móvil: como texto suelto no se leía como algo tocable. */}
+                  <span className="glass flex min-h-14 w-full items-center justify-center gap-2 rounded-full px-7 text-sm font-bold tracking-[0.06em] text-ink uppercase transition-colors duration-200 ease-out-quart group-hover:bg-ink group-hover:text-brand sm:w-auto">
                     Ver el reto
                     <span
                       aria-hidden

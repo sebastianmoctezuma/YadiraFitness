@@ -76,7 +76,7 @@ export function Header() {
           className="hidden items-center gap-7 lg:flex"
         >
           {navegacion.map((item) => (
-            <Link
+            <a
               key={item.href}
               href={item.href}
               // Tinta plena, no el gris secundario: sobre vidrio el fondo
@@ -84,17 +84,17 @@ export function Header() {
               className="relative text-sm font-medium text-ink transition-colors hover:text-brand-text after:absolute after:-bottom-1.5 after:left-0 after:h-[2px] after:w-0 after:bg-brand after:transition-[width] after:duration-300 after:ease-out-quart hover:after:w-full"
             >
               {item.label}
-            </Link>
+            </a>
           ))}
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
+          <a
             href="#retos"
             className="hidden rounded-full bg-ink px-5 py-2.5 text-xs font-bold uppercase tracking-[0.08em] text-bg transition-colors hover:bg-brand hover:text-ink sm:inline-flex"
           >
             Empezar mi reto
-          </Link>
+          </a>
 
           <button
             type="button"
@@ -125,23 +125,23 @@ export function Header() {
       >
         <nav aria-label="Navegación móvil" className="flex flex-col">
           {navegacion.map((item) => (
-            <Link
+            <a
               key={item.href}
               href={item.href}
               onClick={() => setMenuAbierto(false)}
               className="type-h2 border-b border-line py-5 text-[1.6rem] text-ink"
             >
               {item.label}
-            </Link>
+            </a>
           ))}
         </nav>
-        <Link
+        <a
           href="#retos"
           onClick={() => setMenuAbierto(false)}
-          className="mt-8 flex items-center justify-center rounded-full bg-brand px-6 py-4 text-sm font-bold uppercase tracking-[0.08em] text-ink"
+          className="mt-8 flex min-h-14 items-center justify-center rounded-full bg-brand px-6 text-sm font-bold uppercase tracking-[0.08em] text-ink"
         >
           Empezar mi reto
-        </Link>
+        </a>
         <p className="mt-6 text-sm text-ink-muted">
           Presencial y en línea · {site.hashtag}
         </p>

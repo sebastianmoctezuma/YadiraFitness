@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
 import { navegacion, site, whatsappUrl } from "@/lib/site";
 
@@ -39,12 +38,12 @@ export function Footer() {
           <ul className="mt-5 space-y-2.5">
             {navegacion.map((item) => (
               <li key={item.href}>
-                <Link
+                <a
                   href={item.href}
                   className="inline-flex min-h-11 items-center text-sm text-bg/80 transition-colors hover:text-brand"
                 >
                   {item.label}
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
