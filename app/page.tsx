@@ -1,16 +1,13 @@
 import { Coach } from "@/components/secciones/coach";
-import { ComoFunciona } from "@/components/secciones/como-funciona";
 import { CtaFinal } from "@/components/secciones/cta-final";
-import { Faq } from "@/components/secciones/faq";
+import { Entrenamientos } from "@/components/secciones/entrenamientos";
+import { Estudio } from "@/components/secciones/estudio";
 import { Footer } from "@/components/secciones/footer";
 import { Header } from "@/components/secciones/header";
 import { Hero } from "@/components/secciones/hero";
+import { Incluye } from "@/components/secciones/incluye";
 import { Marquesina } from "@/components/secciones/marquesina";
-import { Nutricion } from "@/components/secciones/nutricion";
 import { Retos } from "@/components/secciones/retos";
-import { Testimonios } from "@/components/secciones/testimonios";
-import { Transformaciones } from "@/components/secciones/transformaciones";
-import { preguntas, testimonios, transformaciones } from "@/lib/retos";
 
 export default function Home() {
   return (
@@ -21,11 +18,9 @@ export default function Home() {
         <Marquesina />
         <Coach />
         <Retos />
-        <ComoFunciona />
-        <Nutricion />
-        <Transformaciones items={transformaciones} />
-        <Testimonios items={testimonios} />
-        <Faq items={preguntas} />
+        <Incluye />
+        <Entrenamientos />
+        <Estudio />
         <CtaFinal />
       </main>
       <Footer />

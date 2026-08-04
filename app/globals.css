@@ -1,51 +1,60 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   Yadira Fitness — sistema de diseño
+   Yadira Team — sistema de diseño
 
-   Estrategia de color: "Committed". El amarillo no es un detalle decorativo;
-   carga secciones enteras. El fondo es BLANCO PURO a propósito: el color vive
-   en la marca y en la fotografía, nunca en la superficie. Nada de cremas ni
-   beiges tintados.
+   Registro: estudio de pilates, no gimnasio de pesas. Suave, luminoso y con
+   aire. El amarillo de marca se queda, pero baja de saturación: pasa de
+   señalética a mantequilla. La energía la cargan el espacio en blanco y la
+   tipografía, no el grito.
 
-   Todo en OKLCH para que las rampas sean perceptualmente uniformes.
+   Todo en OKLCH.
 --------------------------------------------------------------------------- */
 
 @theme {
-  /* Superficies */
-  --color-bg: oklch(1 0 0);
-  --color-surface: oklch(0.972 0.001 100);
-  --color-line: oklch(0.905 0.003 100);
+  /* Superficies — blanco con un susurro de rosa. Deliberadamente rosado y no
+     beige: el beige tintado es el fondo por defecto de todo, el rosa es una
+     decisión. */
+  --color-bg: oklch(0.99 0.006 20);
+  --color-surface: oklch(0.968 0.013 22);
+  --color-surface-2: oklch(0.945 0.021 60);
+  --color-line: oklch(0.9 0.014 25);
 
-  /* Tinta */
-  --color-ink: oklch(0.165 0.008 100);
-  --color-ink-muted: oklch(0.44 0.011 100); /* ~8.5:1 sobre blanco */
+  /* Tinta cálida, nunca negro puro: el negro absoluto endurece la página. */
+  --color-ink: oklch(0.27 0.021 30);
+  --color-ink-muted: oklch(0.475 0.021 30); /* 7.6:1 sobre el fondo */
 
-  /* Marca — amarillo marcatextos */
-  --color-brand: oklch(0.875 0.183 99);
-  --color-brand-soft: oklch(0.955 0.062 100);
-  /* Para TEXTO amarillo sobre blanco: el amarillo puro es ilegible.
-     Este ámbar oscuro cumple 4.5:1 y mantiene la lectura de marca. */
-  --color-brand-text: oklch(0.52 0.128 72);
+  /* Marca */
+  --color-brand: oklch(0.905 0.128 99); /* amarillo mantequilla */
+  --color-brand-soft: oklch(0.965 0.05 99);
+  --color-brand-text: oklch(0.53 0.11 68); /* ámbar legible sobre claro */
 
-  /* Tipografía — una sola familia, contraste por peso Y por ancho.
-     Archivo variable (wght 100-900, wdth 62-125). */
-  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  /* Acento rosado, para respirar entre tanto amarillo */
+  --color-rosa: oklch(0.83 0.062 18);
+  --color-rosa-soft: oklch(0.955 0.022 18);
 
-  /* Escala fluida, ratio ~1.3 */
-  --text-display: clamp(2.5rem, 1rem + 6.2vw, 4.75rem);
-  --text-h1: clamp(2.25rem, 1.1rem + 5.2vw, 4rem);
-  --text-h2: clamp(1.75rem, 1rem + 3.2vw, 2.75rem);
-  --text-h3: clamp(1.25rem, 0.95rem + 1.4vw, 1.75rem);
+  /* Tipografía — eje de contraste real: serif + geométrica.
+     Fraunces para los titulares (serif suave, con carácter, no la Playfair de
+     siempre) y Jost para el texto (geométrica, aire de estudio). */
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
 
-  /* Escala z semántica — nunca valores sueltos tipo 999 */
+  /* Escala fluida, más contenida que la anterior: aquí el titular no grita. */
+  --text-display: clamp(2.5rem, 1.1rem + 5.6vw, 4.5rem);
+  --text-h1: clamp(2.1rem, 1.1rem + 4.2vw, 3.5rem);
+  --text-h2: clamp(1.65rem, 1rem + 2.8vw, 2.5rem);
+  --text-h3: clamp(1.2rem, 0.95rem + 1.2vw, 1.6rem);
+
   --z-index-sticky: 40;
   --z-index-nav: 50;
   --z-index-overlay: 60;
 
-  /* Curvas — exponenciales, sin rebote */
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* Curvas generosas: nada de esquinas duras en este registro. */
+  --radius-suave: 1.75rem;
+  --radius-blob: 48% 52% 44% 56% / 52% 44% 56% 48%;
 }
 
 @layer base {
@@ -64,7 +73,8 @@
     background-color: var(--color-bg);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-synthesis-weight: none;
+    font-weight: 300;
+    letter-spacing: 0.005em;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -83,109 +93,100 @@
     color: var(--color-ink);
   }
 
-  /* Foco visible y consistente en toda la página */
   :focus-visible {
-    outline: 3px solid var(--color-ink);
+    outline: 2.5px solid var(--color-ink);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 4px;
   }
 }
 
 @layer components {
-  /* El display de la marca: Archivo llevado a ancho expandido y peso máximo.
-     Ancho + peso en vez del condensado-de-gimnasio, que es el reflejo obvio
-     de la categoría. */
+  /* Titulares: serif ligera, caja baja y tracking casi neutro. Lo contrario
+     de la versalita pesada de gimnasio. */
   .type-display {
-    font-variation-settings: "wdth" 112;
-    font-weight: 800;
-    letter-spacing: -0.035em; /* nunca por debajo de -0.04em */
-    /* El tracking negativo también cierra los espacios entre palabras y las
-       pega; esto se los devuelve. */
-    word-spacing: 0.06em;
-    line-height: 0.92;
-    text-transform: uppercase;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-variation-settings: "SOFT" 30, "WONK" 1, "opsz" 144;
+    letter-spacing: -0.018em;
+    line-height: 1.02;
   }
 
   .type-h2 {
-    font-variation-settings: "wdth" 108;
-    font-weight: 750;
-    letter-spacing: -0.028em;
-    word-spacing: 0.05em;
-    line-height: 1;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-variation-settings: "SOFT" 24, "WONK" 1, "opsz" 72;
+    letter-spacing: -0.012em;
+    line-height: 1.08;
+  }
+
+  /* Etiqueta pequeña en versalitas. Se usa con cuentagotas, no encima de cada
+     sección. */
+  .type-etiqueta {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
   }
 
-  /* Marcatextos: el gesto de marca. Un trazo amarillo detrás de la palabra,
-     como subrayar el día en el calendario del reto. */
-  .mark {
-    position: relative;
-    display: inline-block;
-    isolation: isolate;
+  /* Subrayado a mano alzada: el gesto de marca. Sustituye al marcatextos duro
+     de la versión anterior; aquí acaricia en vez de tachar. */
+  .subrayado {
+    background-image: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--color-brand) 8%,
+      var(--color-brand) 92%,
+      transparent 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 0.32em;
+    background-position: 0 88%;
+    padding-inline: 0.08em;
   }
 
-  .mark::before {
-    content: "";
-    position: absolute;
-    inset: 12% -0.18em 14% -0.18em;
-    background-color: var(--color-brand);
-    transform: skewX(-9deg);
-    z-index: -1;
-  }
-
-  /* Liquid glass. Deliberadamente escaso: solo sobre fotografía o sobre
-     contenido que se desplaza por debajo. Nunca sobre un fondo plano. */
+  /* Liquid glass. Escaso y con función: sobre fotografía o sobre contenido
+     que se desplaza por debajo. */
   .glass {
-    background-color: color-mix(in oklab, white 62%, transparent);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid color-mix(in oklab, white 70%, transparent);
+    background-color: color-mix(in oklab, white 66%, transparent);
+    backdrop-filter: blur(22px) saturate(170%);
+    -webkit-backdrop-filter: blur(22px) saturate(170%);
+    border: 1px solid color-mix(in oklab, white 75%, transparent);
     box-shadow:
-      0 1px 0 0 color-mix(in oklab, white 80%, transparent) inset,
-      0 8px 32px -8px oklch(0.165 0.008 100 / 0.18);
+      0 1px 0 0 color-mix(in oklab, white 85%, transparent) inset,
+      0 8px 30px -10px oklch(0.27 0.021 30 / 0.16);
   }
 
-  /* Liquid glass de la barra de navegación.
-     A diferencia de `.glass`, este suma el reflejo especular del canto superior
-     y una capa de gradiente: es lo que hace que la pastilla parezca vidrio con
-     volumen y no un rectángulo translúcido. */
   .glass-nav {
-    /* Opacidad alta a propósito. Con el vidrio más transparente se veía muy
-       bien sobre el hero claro, pero sobre la sección oscura y sobre el CTA
-       amarillo el fondo se transparentaba tanto que los enlaces dejaban de
-       leerse. El vidrio sigue notándose por el desenfoque y el tinte. */
     background-image: linear-gradient(
       to bottom,
-      color-mix(in oklab, white 90%, transparent),
-      color-mix(in oklab, white 78%, transparent)
+      color-mix(in oklab, white 88%, transparent),
+      color-mix(in oklab, white 74%, transparent)
     );
-    backdrop-filter: blur(28px) saturate(190%);
-    -webkit-backdrop-filter: blur(28px) saturate(190%);
-    border: 1px solid color-mix(in oklab, white 85%, transparent);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid color-mix(in oklab, white 82%, transparent);
     box-shadow:
-      /* reflejo especular en el canto superior */
-      0 1px 0 0 color-mix(in oklab, white 95%, transparent) inset,
-      /* sombra en el canto inferior: le da grosor al vidrio */
-      0 -1px 0 0 color-mix(in oklab, oklch(0.165 0.008 100) 8%, transparent) inset,
-      0 2px 6px -2px oklch(0.165 0.008 100 / 0.1),
-      0 12px 32px -12px oklch(0.165 0.008 100 / 0.22);
+      0 1px 0 0 color-mix(in oklab, white 92%, transparent) inset,
+      0 -1px 0 0 color-mix(in oklab, oklch(0.27 0.021 30) 7%, transparent) inset,
+      0 2px 6px -2px oklch(0.27 0.021 30 / 0.08),
+      0 14px 34px -14px oklch(0.27 0.021 30 / 0.18);
   }
 
-  /* Vidrio oscuro para el logotipo. Va más opaco que `.glass-dark` porque su
-     trabajo es devolverle el color al amarillo: sobre un gris medio seguía
-     apagado. Con el fondo casi negro el amarillo recupera toda su fuerza y
-     sigue siendo vidrio (desenfoca y deja pasar el fondo). */
+  /* Vidrio oscuro bajo el logotipo, para que el amarillo no se lave sobre el
+     vidrio claro del navbar. */
   .glass-logo {
-    background-color: color-mix(in oklab, oklch(0.165 0.008 100) 82%, transparent);
+    background-color: color-mix(in oklab, oklch(0.27 0.021 30) 84%, transparent);
     backdrop-filter: blur(20px) saturate(170%);
     -webkit-backdrop-filter: blur(20px) saturate(170%);
-    border: 1px solid color-mix(in oklab, white 28%, transparent);
+    border: 1px solid color-mix(in oklab, white 26%, transparent);
     box-shadow:
-      0 1px 0 0 color-mix(in oklab, white 30%, transparent) inset,
-      0 4px 14px -4px oklch(0.165 0.008 100 / 0.45);
+      0 1px 0 0 color-mix(in oklab, white 28%, transparent) inset,
+      0 4px 14px -4px oklch(0.27 0.021 30 / 0.4);
   }
 
   .glass-dark {
-    background-color: color-mix(in oklab, oklch(0.165 0.008 100) 38%, transparent);
+    background-color: color-mix(in oklab, oklch(0.27 0.021 30) 42%, transparent);
     backdrop-filter: blur(24px) saturate(160%);
     -webkit-backdrop-filter: blur(24px) saturate(160%);
     border: 1px solid color-mix(in oklab, white 22%, transparent);
@@ -194,40 +195,38 @@
 
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .glass {
-      background-color: oklch(1 0 0 / 0.92);
+      background-color: oklch(1 0 0 / 0.93);
     }
     .glass-nav {
       background-image: none;
       background-color: oklch(1 0 0 / 0.95);
     }
-    .glass-dark {
-      background-color: oklch(0.165 0.008 100 / 0.78);
-    }
     .glass-logo {
-      background-color: oklch(0.165 0.008 100 / 0.92);
+      background-color: oklch(0.27 0.021 30 / 0.93);
+    }
+    .glass-dark {
+      background-color: oklch(0.27 0.021 30 / 0.8);
     }
   }
 }
 
 /* ---------------------------------------------------------------------------
-   Revelado al hacer scroll.
-
-   El estado por defecto es VISIBLE. La clase `js-reveal` la pone un script
-   inline antes del primer paint, así que sin JS (o en un crawler headless) el
-   contenido se ve igual: nunca se envía una sección en blanco.
+   Revelado al hacer scroll. El estado por defecto es VISIBLE: la clase
+   `js-reveal` la pone un script inline antes del primer paint, así que sin JS
+   nada se oculta y ninguna sección se publica en blanco.
 --------------------------------------------------------------------------- */
 
 .js-reveal [data-reveal] {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(16px);
 }
 
 .js-reveal [data-reveal][data-revealed="true"] {
   opacity: 1;
   transform: none;
   transition:
-    opacity 0.7s var(--ease-out-quint),
-    transform 0.7s var(--ease-out-quint);
+    opacity 0.8s var(--ease-out-quint),
+    transform 0.8s var(--ease-out-quint);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
@@ -242,7 +241,6 @@
   }
 }
 
-/* Marquesina de la barra de confianza */
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -253,7 +251,7 @@
 }
 
 .animate-marquee {
-  animation: marquee 38s linear infinite;
+  animation: marquee 44s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

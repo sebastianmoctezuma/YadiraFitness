@@ -1,16 +1,22 @@
 import type { Metadata } from "next";
-import { Archivo } from "next/font/google";
+import { Fraunces, Jost } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
 /**
- * Una sola familia. El contraste sale del eje de ancho (wdth) y del peso,
- * no de emparejar dos tipografías parecidas entre sí.
+ * Emparejadas por eje de contraste, no por parecido: serif suave para los
+ * titulares y geométrica para el texto.
  */
-const archivo = Archivo({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  axes: ["wdth"],
-  variable: "--font-archivo",
+  axes: ["SOFT", "WONK", "opsz"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const jost = Jost({
+  subsets: ["latin"],
+  variable: "--font-jost",
   display: "swap",
 });
 
@@ -48,7 +54,7 @@ export default function RootLayout({
   return (
     <html
       lang="es-MX"
-      className={`${archivo.variable} h-full`}
+      className={`${fraunces.variable} ${jost.variable} h-full`}
       suppressHydrationWarning
     >
       <head>

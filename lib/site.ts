@@ -1,33 +1,30 @@
 /**
- * Configuración de la marca. Un solo lugar para cambiar datos de contacto,
- * nombre y enlaces cuando Yadira los confirme.
+ * Configuración de la marca. Todo lo de aquí sale de los flyers de Yadira.
  */
 export const site = {
-  // TODO(cliente): decidir el nombre que encabeza la página. Sus flyers usan
-  // "TEAM YADIRA" como firma y "LA GUERRERA" (#LAGUERRERA) como nombre del
-  // programa. "Yadira Fitness" es un nombre de trabajo, no aparece en su
-  // material.
   nombre: "Yadira Team",
   nombreCorto: "Yadira",
-  equipo: "Yadira Team",
   programa: "La Guerrera",
   hashtag: "#LaGuerrera",
+  temporada: "3ª temporada 2026",
   // TODO(cliente): confirmar el número real de WhatsApp.
   whatsapp: "5215500000000",
-  instagram: "https://instagram.com/",
-  email: "hola@yadirafitness.mx",
-  ciudad: "Ciudad de México",
+  instagram: "https://instagram.com/la_guerrera_yadira",
+  instagramUsuario: "@la_guerrera_yadira",
+  tiktok: "https://tiktok.com/@yadirahernandez1984",
+  tiktokUsuario: "@yadirahernandez1984",
+  facebook: "https://facebook.com/",
+  facebookUsuario: "Yadira Hernandez",
   descripcion:
-    "Reto de 90 días con plan de comidas y rutina personalizados, mediciones, seguimiento y entrenamiento presencial u online.",
+    "Gym privado exclusivo de mujeres, a puerta cerrada. Entrenamiento personal presencial y en línea, con cocina propia para elaborar tu dieta.",
 } as const;
 
 export const whatsappUrl = (mensaje: string) =>
   `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(mensaje)}`;
 
 export const navegacion = [
+  { href: "#coach", label: "La coach" },
   { href: "#retos", label: "Retos" },
-  { href: "#como-funciona", label: "Cómo funciona" },
-  { href: "#resultados", label: "Resultados" },
-  { href: "#coach", label: "Sobre mí" },
-  { href: "#faq", label: "Preguntas" },
+  { href: "#incluye", label: "Qué incluye" },
+  { href: "#estudio", label: "El estudio" },
 ] as const;

@@ -1,18 +1,14 @@
 const claims = [
-  "Plan de alimentación personalizado",
-  "Seguimiento por WhatsApp cada semana",
-  "Rutinas para gimnasio o para casa",
-  "Pago seguro con tarjeta u OXXO",
-  "Sin alimentos prohibidos",
+  "Gym privado exclusivo de mujeres",
+  "Entrenamiento personal",
+  "Presencial y en línea",
+  "Cocina propia para tu dieta",
+  "Entrenamientos a puerta cerrada",
 ];
 
-/**
- * Franja amarilla. Es la primera vez que el color toma toda la superficie:
- * corta el blanco del hero y ancla la marca antes del catálogo.
- */
 export function Marquesina() {
   return (
-    <div className="overflow-hidden border-y border-ink/10 bg-brand py-3.5">
+    <div className="overflow-hidden border-y border-line bg-surface-2 py-4">
       <div className="flex w-max animate-marquee">
         {[0, 1].map((copia) => (
           <ul
@@ -23,11 +19,11 @@ export function Marquesina() {
             {claims.map((claim) => (
               <li
                 key={claim}
-                className="flex items-center gap-8 px-8 text-[0.78rem] font-bold uppercase tracking-[0.16em] whitespace-nowrap text-ink"
+                className="flex items-center gap-8 px-8 text-sm whitespace-nowrap text-ink"
               >
                 {claim}
-                <span aria-hidden className="text-ink/40">
-                  ✳
+                <span aria-hidden className="text-brand-text/50">
+                  ✿
                 </span>
               </li>
             ))}

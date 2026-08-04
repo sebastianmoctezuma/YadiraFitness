@@ -5,7 +5,8 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/secciones/footer";
 import { Header } from "@/components/secciones/header";
 import { Boton } from "@/components/ui/boton";
-import { getReto, retos } from "@/lib/retos";
+import { getReto, incluye, retos } from "@/lib/retos";
+import { site, whatsappUrl } from "@/lib/site";
 import { etiquetaModalidad } from "@/lib/types";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -19,107 +20,57 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const reto = getReto(slug);
   if (!reto) return {};
 
-  return {
-    title: `Reto ${reto.duracionDias} días — ${reto.nombre}`,
-    description: reto.descripcion,
-  };
+  return { title: reto.nombre, description: reto.descripcion };
 }
-
-const precio = (mxn: number) =>
-  new Intl.NumberFormat("es-MX", {
-    style: "currency",
-    currency: "MXN",
-    maximumFractionDigits: 0,
-  }).format(mxn);
 
 export default async function RetoPage({ params }: Props) {
   const { slug } = await params;
   const reto = getReto(slug);
   if (!reto) notFound();
 
-  const inicio = new Date(reto.fechaInicio + "T00:00:00").toLocaleDateString(
-    "es-MX",
-    { day: "numeric", month: "long", year: "numeric" },
-  );
-
   return (
     <>
       <Header />
-      <main className="pt-28 pb-24 sm:pt-36">
-        <div className="mx-auto max-w-[88rem] px-5 sm:px-8">
+      <main className="pt-32 pb-24 sm:pt-40">
+        <div className="mx-auto max-w-[84rem] px-5 sm:px-8">
           <Link
             href="/#retos"
-            className="text-sm font-medium text-ink-muted transition-colors hover:text-ink"
+            className="text-sm text-ink-muted transition-colors hover:text-ink"
           >
             ← Todos los retos
           </Link>
 
-          <div className="mt-8 grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:gap-20">
+          <div className="mt-8 grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:gap-20">
             <div>
-              <div className="flex items-baseline gap-3">
-                <span
-                  className="type-display text-[clamp(4rem,11vw,7rem)] text-ink"
-                  style={{ fontVariationSettings: '"wdth" 118' }}
-                >
-                  {reto.duracionDias}
-                </span>
-                <span className="text-sm font-bold uppercase tracking-[0.14em] text-ink-muted">
-                  días
-                </span>
-              </div>
-
-              <h1 className="type-h2 mt-2 text-h1 text-ink">{reto.nombre}</h1>
-
-              <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold uppercase tracking-[0.1em] text-ink-muted">
-                {reto.temporada && (
-                  <>
-                    <span className="rounded-full bg-brand px-3 py-1 text-ink">
-                      {reto.temporada}ª temporada
-                    </span>
-                    <span aria-hidden className="text-line">
-                      ·
-                    </span>
-                  </>
-                )}
-                <span>{etiquetaModalidad[reto.modalidad]}</span>
+              <p className="type-etiqueta text-brand-text">
+                {reto.duracionDias} días
+                {reto.temporada ? ` · ${reto.temporada}ª temporada` : ""}
               </p>
 
-              <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-ink-muted">
+              <h1 className="type-display mt-5 text-h1 text-ink">
+                {reto.nombre}
+              </h1>
+              <p className="mt-6 max-w-[52ch] text-lg leading-[1.8] text-ink-muted">
                 {reto.descripcion}
               </p>
 
-              <h2 className="mt-12 text-h3 font-bold tracking-[-0.02em] text-ink">
-                Qué incluye
-              </h2>
-              <ul className="mt-5 space-y-3.5">
-                {reto.incluye.map((cosa) => (
-                  <li key={cosa} className="flex gap-3.5 text-[0.95rem] text-ink">
-                    <span
-                      aria-hidden
-                      className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand ring-4 ring-brand-soft"
-                    />
-                    <span className="max-w-[52ch] leading-relaxed">{cosa}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <h2 className="mt-12 text-h3 font-bold tracking-[-0.02em] text-ink">
-                Este reto es para ti si
-              </h2>
-              <ul className="mt-5 space-y-3.5">
-                {reto.paraTi.map((cosa) => (
-                  <li key={cosa} className="flex gap-3.5 text-[0.95rem] text-ink">
-                    <span aria-hidden className="mt-0.5 text-brand-text">
-                      ✓
-                    </span>
-                    <span className="max-w-[52ch] leading-relaxed">{cosa}</span>
+              <h2 className="type-h2 mt-14 text-h3 text-ink">Qué incluye</h2>
+              <ul className="mt-6 border-t border-line">
+                {incluye.map((item) => (
+                  <li key={item.titulo} className="border-b border-line py-5">
+                    <h3 className="text-base font-medium text-ink">
+                      {item.titulo}
+                    </h3>
+                    <p className="mt-1.5 max-w-[52ch] text-[0.95rem] leading-relaxed text-ink-muted">
+                      {item.detalle}
+                    </p>
                   </li>
                 ))}
               </ul>
             </div>
 
             <div>
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-suave)]">
                 <Image
                   src={reto.imagen}
                   alt={reto.imagenAlt}
@@ -130,29 +81,23 @@ export default async function RetoPage({ params }: Props) {
                 />
               </div>
 
-              <div className="mt-6 rounded-3xl border border-line p-7">
-                {reto.precioAnteriorMXN && (
-                  <p className="text-sm text-ink-muted line-through">
-                    {precio(reto.precioAnteriorMXN)}
-                  </p>
-                )}
-                <p className="text-4xl font-extrabold tracking-[-0.03em] text-ink">
-                  {precio(reto.precioMXN)}
+              <div className="mt-6 rounded-[var(--radius-suave)] bg-surface p-8">
+                <p className="type-etiqueta text-ink-muted">
+                  {etiquetaModalidad[reto.modalidad]}
                 </p>
-                <p className="mt-1.5 text-sm text-ink-muted">
-                  Pago único · Arranca el {inicio}
+                <p className="mt-4 text-[0.95rem] leading-[1.75] text-ink-muted">
+                  El precio y la fecha de arranque de la siguiente generación se
+                  confirman por WhatsApp. Los cupos son limitados.
                 </p>
 
-                {/* TODO: aquí entra Stripe Checkout. Hoy lleva a la página de
-                    confirmación para poder recorrer el flujo completo. */}
-                <Boton href="/gracias" className="mt-6 w-full">
-                  Reservar mi lugar
+                <Boton
+                  href={whatsappUrl(
+                    `Hola ${site.nombreCorto}, me interesa el ${reto.nombre} de ${reto.duracionDias} días.`,
+                  )}
+                  className="mt-7 w-full"
+                >
+                  Reservar mi cupo
                 </Boton>
-
-                <p className="mt-4 text-xs leading-relaxed text-ink-muted">
-                  Pago seguro con tarjeta u OXXO. Si cancelas antes de que te
-                  entregue tu plan, te devuelvo el 100%.
-                </p>
               </div>
             </div>
           </div>

@@ -1,35 +1,34 @@
 import { Boton } from "@/components/ui/boton";
-import { retos } from "@/lib/retos";
+import { site, whatsappUrl } from "@/lib/site";
 
-const proximaFecha = new Date(retos[0].fechaInicio + "T00:00:00").toLocaleDateString(
-  "es-MX",
-  { day: "numeric", month: "long" },
-);
-
-/**
- * El único bloque donde el amarillo es la superficie completa. Cierra la página
- * con el mismo color con que la franja la abrió.
- */
 export function CtaFinal() {
   return (
-    <section className="bg-brand py-24 sm:py-32">
-      <div className="mx-auto max-w-[88rem] px-5 text-center sm:px-8">
-        <h2 className="type-display mx-auto max-w-[19ch] text-h1 text-ink">
-          La siguiente generación arranca el{" "}
-          {/* Sin cortar solo cuando cabe: a 390px "1 de septiembre" en una
-              sola línea desbordaba el viewport. */}
-          <span className="sm:whitespace-nowrap">{proximaFecha}</span>
+    <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-32 left-1/2 h-[30rem] w-[30rem] -translate-x-1/2 rounded-[var(--radius-blob)] bg-rosa-soft blur-3xl"
+      />
+
+      <div className="relative mx-auto max-w-[84rem] px-5 text-center sm:px-8">
+        <p className="type-etiqueta text-brand-text">{site.temporada}</p>
+        <h2 className="type-display mx-auto mt-5 max-w-[18ch] text-h1 text-ink">
+          Reserva tu cupo
         </h2>
-        <p className="mx-auto mt-6 max-w-[46ch] text-base leading-relaxed text-ink/75">
-          Cierro inscripciones tres días antes para tener listo tu plan a
-          tiempo. Después de eso te toca esperar a la siguiente.
+        <p className="mx-auto mt-6 max-w-[44ch] text-base leading-[1.8] text-ink-muted">
+          Los lugares son limitados porque el entrenamiento es personal.
+          Escríbeme y te cuento cómo empezamos.
         </p>
+
         <div className="mt-9 flex flex-wrap justify-center gap-3">
-          <Boton href="#retos" variante="oscuro">
-            Apartar mi lugar
+          <Boton
+            href={whatsappUrl(
+              `Hola ${site.nombreCorto}, quiero reservar mi cupo.`,
+            )}
+          >
+            Escribir por WhatsApp
           </Boton>
-          <Boton href="#faq" variante="secundario">
-            Tengo dudas
+          <Boton href="#retos" variante="secundario">
+            Ver los retos
           </Boton>
         </div>
       </div>

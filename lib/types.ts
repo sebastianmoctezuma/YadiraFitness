@@ -6,61 +6,40 @@
  * cambia el origen pero no cambian los componentes.
  */
 
-/** Un reto que se vende en la landing. Tabla futura: `retos`. */
+/** Un reto del programa. Tabla futura: `retos`. */
 export type Reto = {
   /** Identificador en la URL: /retos/reto-90-dias */
   slug: string;
   nombre: string;
-  /** Gancho corto para la tarjeta del catálogo. */
+  duracionDias: 30 | 90;
+  /** Gancho corto para el catálogo. */
   tagline: string;
-  duracionDias: 30 | 60 | 90;
-  /** Precio en pesos, entero, sin centavos. */
-  precioMXN: number;
-  /** Precio tachado para mostrar un descuento. Omitir si no aplica. */
-  precioAnteriorMXN?: number;
-  /** Fecha ISO (YYYY-MM-DD) en que arranca la generación actual. */
-  fechaInicio: string;
   descripcion: string;
-  /** Número de temporada/generación. Los flyers la anuncian como "3ª temporada". */
+  /**
+   * Precio y fecha de inicio siguen sin definirse, así que son opcionales y
+   * la interfaz no muestra nada cuando faltan. Publicar un precio provisional
+   * es peor que no publicar ninguno.
+   */
+  precioMXN?: number;
+  fechaInicio?: string;
+  /** Número de generación, si aplica. */
   temporada?: number;
   modalidad: "presencial" | "online" | "ambas";
   incluye: string[];
-  /** Para quién es y para quién no. Baja las devoluciones. */
-  paraTi: string[];
   imagen: string;
   imagenAlt: string;
-  /** Destaca una sola tarjeta en el catálogo. */
   destacado?: boolean;
   activo: boolean;
-};
-
-/** Par antes/después. Requiere consentimiento firmado de la persona. */
-export type Transformacion = {
-  id: string;
-  nombre: string;
-  retoSlug: string;
-  /** Resultado en palabras de la persona, no una cifra inventada. */
-  resultado: string;
-  antesSrc: string;
-  despuesSrc: string;
-  alt: string;
-};
-
-export type Testimonio = {
-  id: string;
-  nombre: string;
-  reto: string;
-  cita: string;
-  avatarSrc: string;
 };
 
 export const etiquetaModalidad: Record<Reto["modalidad"], string> = {
   presencial: "Presencial",
   online: "En línea",
-  ambas: "Presencial o en línea",
+  ambas: "Presencial y en línea",
 };
 
-export type PreguntaFrecuente = {
-  pregunta: string;
-  respuesta: string;
+/** Tipo de entrenamiento que se ofrece. */
+export type TipoEntrenamiento = {
+  titulo: string;
+  detalle: string;
 };

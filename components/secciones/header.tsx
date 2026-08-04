@@ -144,7 +144,7 @@ export function Header() {
           Empezar mi reto
         </Link>
         <p className="mt-6 text-sm text-ink-muted">
-          {site.ciudad} · Presencial y en línea
+          Presencial y en línea · {site.hashtag}
         </p>
       </div>
     </header>
