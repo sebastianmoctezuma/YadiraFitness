@@ -63,11 +63,19 @@ export function Header() {
               }`}
             />
           </span>
-          <span
-            className="text-base font-extrabold tracking-[-0.02em] text-ink uppercase sm:text-lg"
-            style={{ fontVariationSettings: '"wdth" 112' }}
-          >
-            Yadira
+          <span className="flex items-baseline gap-1.5 leading-none">
+            <span
+              className="text-base font-extrabold tracking-[-0.02em] text-ink uppercase sm:text-lg"
+              style={{ fontVariationSettings: '"wdth" 112' }}
+            >
+              Yadira
+            </span>
+            <span
+              className="text-[0.6rem] font-bold tracking-[0.2em] text-ink-muted uppercase sm:text-[0.65rem]"
+              style={{ fontVariationSettings: '"wdth" 88' }}
+            >
+              Team
+            </span>
           </span>
         </Link>
 

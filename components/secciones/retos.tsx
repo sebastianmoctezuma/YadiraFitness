@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/reveal";
 import { retos } from "@/lib/retos";
@@ -61,15 +60,6 @@ export function Retos() {
                 </div>
 
                 <div className="flex items-center gap-6 sm:flex-col sm:items-end sm:gap-4">
-                  <div className="relative hidden h-24 w-24 shrink-0 overflow-hidden rounded-2xl lg:block">
-                    <Image
-                      src={reto.imagen}
-                      alt={reto.imagenAlt}
-                      fill
-                      sizes="96px"
-                      className="object-cover transition-transform duration-500 ease-out-quart group-hover:scale-105"
-                    />
-                  </div>
                   {/* Botón de verdad, con liquid glass, y a ancho completo en
                       móvil: como texto suelto no se leía como algo tocable. */}
                   <span className="glass flex min-h-14 w-full items-center justify-center gap-2 rounded-full px-7 text-sm font-bold tracking-[0.06em] text-ink uppercase transition-colors duration-200 ease-out-quart group-hover:bg-ink group-hover:text-brand sm:w-auto">

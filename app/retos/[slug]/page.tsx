@@ -6,7 +6,7 @@ import { BarraMovil } from "@/components/secciones/barra-movil";
 import { Footer } from "@/components/secciones/footer";
 import { Header } from "@/components/secciones/header";
 import { Boton } from "@/components/ui/boton";
-import { getReto, incluye, retos } from "@/lib/retos";
+import { getReto, incluye, retos, transformaciones } from "@/lib/retos";
 import { site, whatsappUrl } from "@/lib/site";
 import { etiquetaModalidad } from "@/lib/types";
 
@@ -86,10 +86,12 @@ export default async function RetoPage({ params }: Props) {
             </div>
 
             <div>
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl">
+              {/* Una transformación real de una clienta. Antes había una foto
+                  de stock de un estudio luminoso que no era su gym. */}
+              <div className="relative aspect-square w-full overflow-hidden rounded-3xl">
                 <Image
-                  src={reto.imagen}
-                  alt={reto.imagenAlt}
+                  src={transformaciones[0].src}
+                  alt={transformaciones[0].alt}
                   fill
                   priority
                   sizes="(max-width: 1024px) 90vw, 40vw"

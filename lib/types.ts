@@ -23,8 +23,6 @@ export type Reto = {
   fechaInicio?: string;
   temporada?: number;
   modalidad: "presencial" | "online" | "ambas";
-  imagen: string;
-  imagenAlt: string;
   destacado?: boolean;
   activo: boolean;
 };
