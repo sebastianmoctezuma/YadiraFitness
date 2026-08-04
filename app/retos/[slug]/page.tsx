@@ -34,11 +34,14 @@ export default async function RetoPage({ params }: Props) {
       <Header />
       <main className="mesh-amarillo pt-28 pb-28 sm:pt-36 lg:pb-24">
         <div className="mx-auto max-w-[88rem] px-5 sm:px-8">
+          {/* Solo la flecha. Lleva nombre accesible porque un lector de
+              pantalla no puede leer una flecha suelta. */}
           <Link
             href="/#retos"
-            className="inline-flex min-h-11 items-center text-sm font-medium text-ink-muted transition-colors hover:text-ink"
+            aria-label="Volver a todos los retos"
+            className="glass flex h-12 w-12 items-center justify-center rounded-full text-lg text-ink transition-colors duration-200 ease-out-quart hover:bg-ink hover:text-brand"
           >
-            ← Todos los retos
+            <span aria-hidden>←</span>
           </Link>
 
           <div className="mt-8 grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:gap-20">
