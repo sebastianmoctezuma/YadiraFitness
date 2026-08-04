@@ -37,8 +37,11 @@ export function Header() {
       {/* Pastilla de vidrio flotante. El vidrio está siempre presente porque
           es lo que la hace legible sobre cualquier sección; al hacer scroll
           solo se ciñe un poco y gana sombra. */}
+      {/* `relative z-10` mantiene la pastilla por encima del panel del menú.
+          Sin esto el panel se pintaba sobre el botón de cerrar y el menú se
+          quedaba abierto sin manera de salir en móvil. */}
       <div
-        className={`glass-nav mx-auto flex max-w-[84rem] items-center justify-between gap-4 rounded-full transition-all duration-500 ease-out-quart ${
+        className={`glass-nav relative z-10 mx-auto flex max-w-[84rem] items-center justify-between gap-4 rounded-full transition-all duration-500 ease-out-quart ${
           conScroll ? "px-3 py-2 sm:px-4" : "px-4 py-2.5 sm:px-6 sm:py-3"
         }`}
       >
@@ -47,24 +50,25 @@ export function Header() {
           className="flex items-center gap-2.5"
           onClick={() => setMenuAbierto(false)}
         >
-          <Logo
-            className={`w-auto transition-all duration-500 ease-out-quart ${
-              conScroll ? "h-9" : "h-10 sm:h-11"
+          {/* Vidrio oscuro bajo el logo: sobre el vidrio claro del navbar el
+              amarillo se lavaba. Un fondo oscuro translúcido lo devuelve a su
+              color sin recolorear el archivo. */}
+          <span
+            className={`glass-logo flex shrink-0 items-center justify-center rounded-full transition-all duration-500 ease-out-quart ${
+              conScroll ? "h-10 w-10" : "h-11 w-11 sm:h-12 sm:w-12"
             }`}
-          />
-          <span className="flex items-baseline gap-1.5 leading-none">
-            <span
-              className="text-base font-extrabold uppercase tracking-[-0.02em] text-ink sm:text-lg"
-              style={{ fontVariationSettings: '"wdth" 112' }}
-            >
-              Yadira
-            </span>
-            <span
-              className="hidden text-[0.65rem] font-medium uppercase tracking-[0.24em] text-ink-muted sm:inline"
-              style={{ fontVariationSettings: '"wdth" 88' }}
-            >
-              Team
-            </span>
+          >
+            <Logo
+              className={`w-auto transition-all duration-500 ease-out-quart ${
+                conScroll ? "h-7" : "h-8 sm:h-9"
+              }`}
+            />
+          </span>
+          <span
+            className="text-base font-extrabold uppercase tracking-[-0.02em] text-ink sm:text-lg"
+            style={{ fontVariationSettings: '"wdth" 112' }}
+          >
+            Yadira
           </span>
         </Link>
 
@@ -118,7 +122,7 @@ export function Header() {
       <div
         id="menu-movil"
         hidden={!menuAbierto}
-        className="fixed inset-0 z-overlay overflow-y-auto bg-bg px-5 pt-28 pb-10 lg:hidden"
+        className="fixed inset-0 overflow-y-auto bg-bg px-5 pt-28 pb-10 lg:hidden"
       >
         <nav aria-label="Navegación móvil" className="flex flex-col">
           {navegacion.map((item) => (

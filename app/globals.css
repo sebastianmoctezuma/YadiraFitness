@@ -170,6 +170,20 @@
       0 12px 32px -12px oklch(0.165 0.008 100 / 0.22);
   }
 
+  /* Vidrio oscuro para el logotipo. Va más opaco que `.glass-dark` porque su
+     trabajo es devolverle el color al amarillo: sobre un gris medio seguía
+     apagado. Con el fondo casi negro el amarillo recupera toda su fuerza y
+     sigue siendo vidrio (desenfoca y deja pasar el fondo). */
+  .glass-logo {
+    background-color: color-mix(in oklab, oklch(0.165 0.008 100) 82%, transparent);
+    backdrop-filter: blur(20px) saturate(170%);
+    -webkit-backdrop-filter: blur(20px) saturate(170%);
+    border: 1px solid color-mix(in oklab, white 28%, transparent);
+    box-shadow:
+      0 1px 0 0 color-mix(in oklab, white 30%, transparent) inset,
+      0 4px 14px -4px oklch(0.165 0.008 100 / 0.45);
+  }
+
   .glass-dark {
     background-color: color-mix(in oklab, oklch(0.165 0.008 100) 38%, transparent);
     backdrop-filter: blur(24px) saturate(160%);
@@ -188,6 +202,9 @@
     }
     .glass-dark {
       background-color: oklch(0.165 0.008 100 / 0.78);
+    }
+    .glass-logo {
+      background-color: oklch(0.165 0.008 100 / 0.92);
     }
   }
 }
