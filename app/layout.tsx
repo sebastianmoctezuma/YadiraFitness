@@ -15,14 +15,18 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
+  // Sin esto, la URL absoluta de la imagen OG depende del entorno; con la
+  // base fija, el preview de WhatsApp/Facebook apunta siempre a producción.
+  metadataBase: new URL("https://yadira-fitness.vercel.app"),
   title: {
-    default: `${site.nombre} — Retos de 30 y 90 días`,
+    default: `Reto Transfórmate — ${site.nombre}`,
     template: `%s · ${site.nombre}`,
   },
   description: site.descripcion,
   openGraph: {
-    title: `${site.nombre} — Retos de 30 y 90 días`,
-    description: site.descripcion,
+    // La info del preview, en palabras de Yadira.
+    title: "Reto Transfórmate",
+    description: "En gym exclusivo para mujeres.",
     locale: "es_MX",
     type: "website",
   },

@@ -90,3 +90,31 @@ Hoy son de Unsplash (uso comercial libre), todas verificadas. Se eligieron por
 luz alta y encuadre con aire negativo del lado del texto. Se sustituyen por las
 de Yadira; las de antes/después exigen consentimiento por escrito de cada
 persona.
+
+## Portada del enlace
+
+[app/opengraph-image.tsx](app/opengraph-image.tsx) — lo que se ve al compartir el
+sitio en WhatsApp o al pautarlo en Facebook.
+
+Antes no había imagen declarada, así que los crawlers caían al ícono y el
+preview salía siendo el logo amarillo solo; como anuncio eso no invita a abrir
+nada. La primera versión fue tipográfica pura; Yadira pidió salir ella en el
+preview, así que ahora lleva **su retrato a sangre por la derecha** con una
+franja amarilla que lo separa del texto.
+
+El texto es la info que ella dictó: titular "Reto Transfórmate" con el
+marcatextos amarillo, y debajo "En gym exclusivo para mujeres" y "Presencial y
+en línea". Los mismos textos van en el `openGraph` de
+[app/layout.tsx](app/layout.tsx), que es lo que WhatsApp muestra como título y
+descripción de la tarjeta.
+
+Tres cosas la atan al resto del sistema y hay que mantenerlas a mano:
+
+- Los colores van en **hex**, porque satori no interpreta `oklch()`. Si cambia un
+  token en [app/globals.css](app/globals.css), hay que traerlo también aquí.
+- Archivo va en **WOFF estático instanciado** (`assets/`), no en la variable: de
+  una fuente variable satori renderiza la instancia por defecto, y se perdería el
+  ancho expandido que da el contraste de la tipografía del sitio.
+- El retrato vive duplicado en `assets/coach-retrato.jpg` porque satori no
+  decodifica el WebP de `public/`. Si se cambia la foto, hay que regenerar el
+  JPEG (`sips -s format jpeg public/coach-retrato.webp --out assets/coach-retrato.jpg`).
