@@ -45,9 +45,9 @@ export function Retos() {
                     <h3 className="text-h3 font-bold tracking-[-0.02em] text-ink">
                       {reto.nombre}
                     </h3>
-                    {reto.temporada && (
+                    {reto.etiqueta && (
                       <span className="rounded-full bg-brand px-3 py-1 text-[0.65rem] font-extrabold tracking-[0.1em] text-ink uppercase">
-                        {reto.temporada}ª temporada
+                        {reto.etiqueta}
                       </span>
                     )}
                   </div>

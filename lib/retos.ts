@@ -26,7 +26,7 @@ export const retos: Reto[] = [
     slug: "reto-90-dias",
     nombre: "Reto Transformación",
     duracionDias: 90,
-    temporada: 3,
+    etiqueta: "El más completo y más pedido",
     tagline: "Noventa días de impacto",
     descripcion:
       "El programa completo de entrenamiento personal: evaluación, plan de comidas, rutina personalizada, suplementación y noventa días de seguimiento con mediciones.",
@@ -44,24 +44,27 @@ export const incluye: Punto[] = [
   {
     titulo: "Plan de comidas personalizado",
     detalle:
-      "Tu dieta se arma según tu meta. Contamos con cocina propia para elaborarla.",
+      "Dieta de acuerdo a tu meta. También contamos con cocina donde te facilitamos elaborarla, por si así lo requieres al hacer presencial tu entreno.",
   },
   {
     titulo: "Rutina de entrenamiento personalizada",
-    detalle: "Un programa hecho para ti, no el mismo repartido a todas.",
+    detalle:
+      "Un programa hecho para ti, de acuerdo a tus prioridades y tu enfoque.",
   },
   {
     titulo: "Corrección de ejercicios y técnica",
-    detalle: "Para que entrenes seguro y cada repetición cuente.",
+    detalle:
+      "Para que entrenes seguro y cada repetición cuente. Siempre estoy al pendiente de cada una.",
   },
   {
     titulo: "Mediciones y seguimiento",
-    detalle: "Evaluación al arrancar y control durante todo el reto.",
+    detalle:
+      "Evaluación al arrancar y control durante todo el reto, con la finalidad de que sigas motivada semana con semana.",
   },
   {
     titulo: "Suplementación",
     detalle:
-      "Con certificación en nutrición fitness y suplementación deportiva.",
+      "Con certificación en nutrición fitness y suplementación deportiva, y la experiencia de más de 18 años.",
   },
   {
     titulo: "Entreno presencial y en línea",
@@ -110,7 +113,8 @@ export const transformaciones = Array.from({ length: 16 }, (_, i) => ({
 export const gym: Punto[] = [
   {
     titulo: "Privado y a puerta cerrada",
-    detalle: "Los entrenamientos son cerrados. Nadie entra a mirar.",
+    detalle:
+      "Mi gym es exclusivo para mi gente, que entrena solo para mis retos y personales. No abierto al público: tendrás la comodidad de vestir como quieras sin sentirte observada.",
   },
   {
     titulo: "Exclusivo de mujeres",
@@ -118,6 +122,7 @@ export const gym: Punto[] = [
   },
   {
     titulo: "Con cocina propia",
-    detalle: "Tu dieta se elabora aquí mismo, así comer bien deja de ser el problema.",
+    detalle:
+      "Contamos con cocina propia donde te facilitamos tus alimentos, en caso de requerir el servicio, para facilitarte tu progreso y meta.",
   },
 ];

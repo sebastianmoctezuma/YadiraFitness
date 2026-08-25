@@ -45,14 +45,16 @@ export function Coach() {
 
           <div className="mt-6 max-w-[52ch] space-y-4 text-base leading-[1.75] text-bg/75">
             <p>
-              Entreno mujeres en un gym privado, a puerta cerrada, donde nadie
-              te mira. Trabajo con pesas y cardio, y armo un programa de
-              entrenamiento personal para cada quien.
+              Coach certificada con más de 18 años de experiencia en el ámbito y
+              ex competidora fitness, con toda la experiencia que necesitas.
+              Actualmente llevo 8 años sin competir y soy madre de 4 hijos
+              maravillosos; jamás me he permitido rendirme. Así que si alguien
+              sabe de ser mamá y llevar tu cuerpo al límite, déjame presentarme.
             </p>
             <p>
-              Aquí aprendes a llevar un estilo de vida saludable y, a la vez, a
-              sacar tu mejor versión. Tengo certificación en nutrición fitness y
-              suplementación deportiva.
+              Tengo un sistema de entrenamiento para cada una, según tu
+              necesidad y tu tiempo, adaptando tu entreno a tu meta. Atrévete a
+              sacar tu mejor versión.
             </p>
           </div>
 

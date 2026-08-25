@@ -17,11 +17,22 @@ export function Hero() {
             Transfórmate en tu <span className="mark">mejor</span> versión
           </h1>
 
-          <p className="mt-7 max-w-[48ch] text-base leading-relaxed text-ink-muted sm:text-lg">
-            Gym privado exclusivo de mujeres, a puerta cerrada. Aquí aprendes a
-            llevar un estilo de vida saludable con un programa de entrenamiento
-            personal, presencial o en línea.
-          </p>
+          {/* Texto de Yadira. Va partido en dos porque son dos cosas distintas
+              —el gancho y lo que hay dentro—, y un solo bloque de este largo se
+              lee como un muro. El primero queda en tinta plena y el segundo en
+              gris: sin esa diferencia, ninguno de los dos manda. */}
+          <div className="mt-7 max-w-[48ch] space-y-4">
+            <p className="text-base leading-relaxed font-medium text-ink sm:text-lg">
+              El reto tan esperado por todas, el que ha cambiado la vida de
+              miles de mujeres. ¿Estás cansada de intentarlo todo? Esto es para
+              ti: soy tu primera o tu última opción, compruébalo.
+            </p>
+            <p className="text-base leading-relaxed text-ink-muted">
+              Gym exclusivo para mujeres donde aprenderás a llevar un estilo de
+              vida saludable con un entrenamiento personal, ya sea presencial u
+              online, como tú decidas. El resultado te sorprenderá.
+            </p>
+          </div>
 
           {/* En móvil los botones van a ancho completo: así quedan alineados
               con el bloque de texto en vez de flotar desiguales a la izquierda. */}

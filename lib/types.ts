@@ -21,7 +21,8 @@ export type Reto = {
    */
   precioMXN?: number;
   fechaInicio?: string;
-  temporada?: number;
+  /** Texto libre del badge junto al nombre ("El más completo y más pedido"). */
+  etiqueta?: string;
   modalidad: "presencial" | "online" | "ambas";
   destacado?: boolean;
   activo: boolean;

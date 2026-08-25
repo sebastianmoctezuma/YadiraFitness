@@ -61,9 +61,9 @@ export default async function RetoPage({ params }: Props) {
               <h1 className="type-h2 mt-2 text-h1 text-ink">{reto.nombre}</h1>
 
               <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-semibold tracking-[0.1em] text-ink-muted uppercase">
-                {reto.temporada && (
+                {reto.etiqueta && (
                   <span className="rounded-full bg-brand px-3 py-1 text-ink">
-                    {reto.temporada}ª temporada
+                    {reto.etiqueta}
                   </span>
                 )}
                 <span>{etiquetaModalidad[reto.modalidad]}</span>
@@ -107,9 +107,8 @@ export default async function RetoPage({ params }: Props) {
                   Reserva tu cupo
                 </h2>
                 <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-muted">
-                  El precio y la fecha de arranque de la siguiente generación se
-                  confirman por WhatsApp. Los cupos son limitados porque el
-                  entrenamiento es personal.
+                  ¿Estás lista? Inscríbete ya. ¿Qué esperas? Mis cupos son
+                  limitados: aprovecha y ve por tu mejor versión.
                 </p>
 
                 <Boton

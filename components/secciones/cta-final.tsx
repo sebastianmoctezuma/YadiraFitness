@@ -16,8 +16,8 @@ export function CtaFinal() {
           Reserva tu cupo
         </h2>
         <p className="mx-auto mt-6 max-w-[46ch] text-base leading-relaxed text-ink/75">
-          Los lugares son limitados porque el entrenamiento es personal.
-          Escríbeme y te digo cómo empezamos.
+          Recuerda: trabajo sobre agenda y mis cupos son limitados. Aprovecha,
+          inscríbete ya y vamos por tu mejor versión.
         </p>
         <div className="mt-9 flex flex-wrap justify-center gap-3">
           <Boton
