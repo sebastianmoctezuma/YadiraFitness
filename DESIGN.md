@@ -98,23 +98,21 @@ sitio en WhatsApp o al pautarlo en Facebook.
 
 Antes no había imagen declarada, así que los crawlers caían al ícono y el
 preview salía siendo el logo amarillo solo; como anuncio eso no invita a abrir
-nada. La primera versión fue tipográfica pura; Yadira pidió salir ella en el
-preview, así que ahora lleva **su retrato a sangre por la derecha** con una
-franja amarilla que lo separa del texto.
+nada. Hubo una versión tipográfica y luego una de foto con textos encima;
+Yadira pidió que fuera **solo su retrato, sin información sobre la foto**. La
+info ("Reto Transfórmate / En gym exclusivo para mujeres") vive en el
+`openGraph` de [app/layout.tsx](app/layout.tsx), que es lo que WhatsApp muestra
+como título y descripción debajo de la imagen.
 
-El texto es la info que ella dictó: titular "Reto Transfórmate" con el
-marcatextos amarillo, y debajo "En gym exclusivo para mujeres" y "Presencial y
-en línea". Los mismos textos van en el `openGraph` de
-[app/layout.tsx](app/layout.tsx), que es lo que WhatsApp muestra como título y
-descripción de la tarjeta.
+Dos cosas a mantener a mano:
 
-Tres cosas la atan al resto del sistema y hay que mantenerlas a mano:
-
-- Los colores van en **hex**, porque satori no interpreta `oklch()`. Si cambia un
-  token en [app/globals.css](app/globals.css), hay que traerlo también aquí.
-- Archivo va en **WOFF estático instanciado** (`assets/`), no en la variable: de
-  una fuente variable satori renderiza la instancia por defecto, y se perdería el
-  ancho expandido que da el contraste de la tipografía del sitio.
 - El retrato vive duplicado en `assets/coach-retrato.jpg` porque satori no
   decodifica el WebP de `public/`. Si se cambia la foto, hay que regenerar el
   JPEG (`sips -s format jpeg public/coach-retrato.webp --out assets/coach-retrato.jpg`).
+- El retrato es vertical y la tarjeta apaisada: el `objectPosition` (28%) está
+  calibrado para esa foto en concreto, encuadrando cara y torso. Con otra foto
+  hay que recalibrarlo mirando el render en `/opengraph-image`.
+
+Las fuentes WOFF estáticas de `assets/` ya no las usa la portada, pero se
+quedan: cualquier arte OG futuro con la tipografía del sitio las necesita
+(satori no instancia fuentes variables).
