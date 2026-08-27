@@ -53,6 +53,11 @@ export default function RootLayout({
     <html
       lang="es-MX"
       className={`${archivo.variable} h-full`}
+      /* Sin esto, Next 16 respeta el scroll-behavior:smooth del CSS también al
+         cambiar de página, y entrar a un reto se ve como un desplazamiento
+         animado hasta arriba. Con el atributo, la navegación restablece el
+         scroll de forma instantánea y los anclas (#retos) siguen suaves. */
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <head>
