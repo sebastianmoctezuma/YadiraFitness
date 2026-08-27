@@ -45,30 +45,36 @@ export const incluye: Punto[] = [
     titulo: "Plan de comidas personalizado",
     detalle:
       "Dieta de acuerdo a tu meta. También contamos con cocina donde te facilitamos elaborarla, por si así lo requieres al hacer presencial tu entreno.",
+    icono: "comidas",
   },
   {
     titulo: "Rutina de entrenamiento personalizada",
     detalle:
       "Un programa hecho para ti, de acuerdo a tus prioridades y tu enfoque.",
+    icono: "rutina",
   },
   {
     titulo: "Corrección de ejercicios y técnica",
     detalle:
       "Para que entrenes seguro y cada repetición cuente. Siempre estoy al pendiente de cada una.",
+    icono: "tecnica",
   },
   {
     titulo: "Mediciones y seguimiento",
     detalle:
       "Evaluación al arrancar y control durante todo el reto, con la finalidad de que sigas motivada semana con semana.",
+    icono: "mediciones",
   },
   {
     titulo: "Suplementación",
     detalle:
       "Con certificación en nutrición fitness y suplementación deportiva, y la experiencia de más de 18 años.",
+    icono: "suplementacion",
   },
   {
     titulo: "Entreno presencial y en línea",
     detalle: "Entrenas en el gym o desde donde estés. El programa es el mismo.",
+    icono: "modalidad",
   },
 ];
 

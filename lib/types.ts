@@ -38,4 +38,6 @@ export const etiquetaModalidad: Record<Reto["modalidad"], string> = {
 export type Punto = {
   titulo: string;
   detalle: string;
+  /** Clave semántica del dibujo que lo acompaña; el SVG vive en el componente. */
+  icono?: string;
 };
