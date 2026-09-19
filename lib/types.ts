@@ -14,13 +14,12 @@ export type Reto = {
   duracionDias: 30 | 90;
   tagline: string;
   descripcion: string;
-  /**
-   * Precio y fecha de inicio siguen sin definirse, así que son opcionales y la
-   * interfaz no muestra nada cuando faltan. Publicar un precio provisional es
-   * peor que no publicar ninguno.
-   */
+  /** Precio publicado, en pesos. La fecha de inicio sigue sin definirse y la
+      interfaz no muestra nada cuando falta. */
   precioMXN?: number;
   fechaInicio?: string;
+  /** Si el botón de pago está disponible; el cierre de cupos hoy es manual. */
+  ventaAbierta: boolean;
   /** Texto libre del badge junto al nombre ("El más completo y más pedido"). */
   etiqueta?: string;
   modalidad: "presencial" | "online" | "ambas";
