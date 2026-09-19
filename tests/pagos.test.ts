@@ -66,11 +66,12 @@ test("construirParamsCheckout arma la sesión con SPEI y modalidad", () => {
     slug: "reto-30-dias",
     priceId: "price_abc",
     origen: "http://localhost:3000",
+    customerId: "cus_123",
   });
   expect(params.mode).toBe("payment");
   expect(params.line_items).toEqual([{ price: "price_abc", quantity: 1 }]);
   expect(params.payment_method_types).toEqual(["card", "customer_balance"]);
-  expect(params.customer_creation).toBe("always");
+  expect(params.customer).toBe("cus_123");
   expect(params.phone_number_collection).toEqual({ enabled: true });
   expect(params.success_url).toBe(
     "http://localhost:3000/gracias?session_id={CHECKOUT_SESSION_ID}",
@@ -85,6 +86,7 @@ test("con promo activa la aplica", () => {
     slug: "reto-90-dias",
     priceId: "price_xyz",
     origen: "https://yadira-fitness.vercel.app",
+    customerId: "cus_123",
     promotionCodeId: "promo_1",
   });
   expect(params.discounts).toEqual([{ promotion_code: "promo_1" }]);

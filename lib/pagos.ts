@@ -56,6 +56,8 @@ export function construirParamsCheckout(opts: {
   slug: string;
   priceId: string;
   origen: string;
+  /** SPEI (customer_balance) exige un Customer ya creado; lo crea la ruta. */
+  customerId: string;
   promotionCodeId?: string;
 }): Stripe.Checkout.SessionCreateParams {
   return {
@@ -68,8 +70,7 @@ export function construirParamsCheckout(opts: {
         bank_transfer: { type: "mx_bank_transfer" },
       },
     },
-    // SPEI (customer_balance) exige que la sesión cree un customer.
-    customer_creation: "always",
+    customer: opts.customerId,
     phone_number_collection: { enabled: true },
     custom_fields: [
       {
