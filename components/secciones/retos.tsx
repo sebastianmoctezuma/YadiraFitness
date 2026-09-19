@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Reveal } from "@/components/ui/reveal";
+import { precioMXN } from "@/lib/precio";
 import { retos } from "@/lib/retos";
 import { etiquetaModalidad } from "@/lib/types";
 
@@ -60,6 +61,11 @@ export function Retos() {
                 </div>
 
                 <div className="flex items-center gap-6 sm:flex-col sm:items-end sm:gap-4">
+                  {reto.precioMXN && (
+                    <span className="text-lg font-extrabold tracking-[-0.01em] text-ink">
+                      {precioMXN(reto.precioMXN)}
+                    </span>
+                  )}
                   {/* Botón de verdad, con liquid glass, y a ancho completo en
                       móvil: como texto suelto no se leía como algo tocable. */}
                   <span className="glass flex min-h-14 w-full items-center justify-center gap-2 rounded-full px-7 text-sm font-bold tracking-[0.06em] text-ink uppercase transition-colors duration-200 ease-out-quart group-hover:bg-ink group-hover:text-brand sm:w-auto">
