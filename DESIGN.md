@@ -116,3 +116,15 @@ Dos cosas a mantener a mano:
 Las fuentes WOFF estáticas de `assets/` ya no las usa la portada, pero se
 quedan: cualquier arte OG futuro con la tipografía del sitio las necesita
 (satori no instancia fuentes variables).
+
+## Pagos
+
+Stripe Checkout hosteado: [app/api/checkout/route.ts](app/api/checkout/route.ts)
+crea la sesión (precios por lookup key `reto-30-dias`/`reto-90-dias`, SPEI +
+tarjeta) y [app/api/stripe/webhook/route.ts](app/api/stripe/webhook/route.ts)
+registra cada pago en la tabla `pagos` de Supabase (upsert idempotente, RLS
+cerrado). El 20% anticipado es el promotion code `ANTICIPADO20` en Stripe:
+se activa/desactiva desde el dashboard, sin deploys. El catálogo de Stripe se
+da de alta con `node --env-file=.env.local scripts/stripe-setup.mjs`
+(idempotente; correr también en live al activar la cuenta). El cierre de
+ventas es manual: `ventaAbierta` en [lib/retos.ts](lib/retos.ts).
