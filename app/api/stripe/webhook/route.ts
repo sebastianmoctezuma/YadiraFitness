@@ -1,7 +1,7 @@
 import type Stripe from "stripe";
 import { sesionAFila } from "@/lib/pagos";
-import { stripe } from "@/lib/stripe";
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { getStripe } from "@/lib/stripe";
+import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
 const EVENTOS = new Set([
   "checkout.session.completed",
@@ -16,7 +16,7 @@ export async function POST(request: Request) {
 
   let evento: Stripe.Event;
   try {
-    evento = stripe.webhooks.constructEvent(
+    evento = getStripe().webhooks.constructEvent(
       cuerpo,
       firma,
       process.env.STRIPE_WEBHOOK_SECRET!,
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     const session = evento.data.object as Stripe.Checkout.Session;
     // Upsert por sesión: los reintentos de Stripe y el par de eventos de
     // SPEI (completed + async_payment_succeeded) no duplican filas.
-    const { error } = await supabaseAdmin
+    const { error } = await getSupabaseAdmin()
       .from("pagos")
       .upsert(sesionAFila(evento.type, session), {
         onConflict: "stripe_session_id",

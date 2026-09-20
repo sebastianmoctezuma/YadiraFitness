@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { CODIGO_ANTICIPADO, construirParamsCheckout } from "@/lib/pagos";
 import { getReto } from "@/lib/retos";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 
 export async function POST(request: Request) {
   const form = await request.formData();
@@ -21,6 +21,7 @@ export async function POST(request: Request) {
   const origen = new URL(request.url).origin;
 
   try {
+    const stripe = getStripe();
     const precios = await stripe.prices.list({
       lookup_keys: [slug],
       limit: 1,

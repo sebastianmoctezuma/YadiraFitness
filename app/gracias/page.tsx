@@ -4,7 +4,7 @@ import { Footer } from "@/components/secciones/footer";
 import { Header } from "@/components/secciones/header";
 import { Boton } from "@/components/ui/boton";
 import { site, whatsappUrl } from "@/lib/site";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 
 export const metadata: Metadata = {
   title: "Gracias",
@@ -21,7 +21,7 @@ export default async function GraciasPage({
 
   let session;
   try {
-    session = await stripe.checkout.sessions.retrieve(session_id);
+    session = await getStripe().checkout.sessions.retrieve(session_id);
   } catch {
     notFound();
   }
