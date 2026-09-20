@@ -28,7 +28,7 @@ export function CtaFinal() {
           >
             Escribir por WhatsApp
           </Boton>
-          <Boton href="#retos" variante="secundario">
+          <Boton href="/#retos" variante="secundario">
             Ver los retos
           </Boton>
         </div>

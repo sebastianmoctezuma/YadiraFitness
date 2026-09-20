@@ -98,7 +98,7 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <a
-            href="#retos"
+            href="/#retos"
             className="hidden rounded-full bg-ink px-5 py-2.5 text-xs font-bold uppercase tracking-[0.08em] text-bg transition-colors hover:bg-brand hover:text-ink sm:inline-flex"
           >
             Empezar mi reto
@@ -144,7 +144,7 @@ export function Header() {
           ))}
         </nav>
         <a
-          href="#retos"
+          href="/#retos"
           onClick={() => setMenuAbierto(false)}
           className="mt-8 flex min-h-14 items-center justify-center rounded-full bg-brand px-6 text-sm font-bold uppercase tracking-[0.08em] text-ink"
         >
