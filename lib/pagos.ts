@@ -18,6 +18,22 @@ export type FilaPago = {
   actualizado: string;
 };
 
+/** Dónde se recuerda la sesión de pago abierta de cada reto. */
+export const nombreCookiePago = (slug: string) => `pago_${slug}`;
+
+/**
+ * Si la clienta se salió y vuelve, retomar su sesión en vez de abrir otra.
+ *
+ * Solo cuando sigue `open`: una sesión `complete` ya se pagó —reabrirla sería
+ * cobrar de nuevo— y una `expired` ya no sirve. Stripe las expira solas a las
+ * 24 h, así que al día siguiente se abre una nueva sin que nadie lo decida.
+ */
+export function puedeReutilizarse(
+  session: Stripe.Checkout.Session | null,
+): boolean {
+  return session?.status === "open";
+}
+
 /**
  * Clave de idempotencia para Stripe. El `intento` lo genera el navegador al
  * cargar la página del reto, así que dos envíos del mismo formulario —doble
@@ -93,13 +109,10 @@ export function construirParamsCheckout(opts: {
   return {
     mode: "payment",
     line_items: [{ price: opts.priceId, quantity: 1 }],
-    payment_method_types: ["card", "customer_balance"],
-    payment_method_options: {
-      customer_balance: {
-        funding_type: "bank_transfer",
-        bank_transfer: { type: "mx_bank_transfer" },
-      },
-    },
+    // Los métodos NO se fijan aquí: los decide lo que esté activo en el
+    // dashboard de Stripe. Fijarlos rompía la cuenta live, donde la
+    // transferencia SPEI no está habilitada y el checkout ni se abría.
+    // Activar OXXO o SPEI mañana no requiere tocar este archivo.
     customer: opts.customerId,
     phone_number_collection: { enabled: true },
     custom_fields: [

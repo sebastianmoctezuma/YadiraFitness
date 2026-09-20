@@ -1,8 +1,11 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import {
   CODIGO_ANTICIPADO,
   claveIdempotencia,
   construirParamsCheckout,
+  nombreCookiePago,
+  puedeReutilizarse,
 } from "@/lib/pagos";
 import { getReto } from "@/lib/retos";
 import { getStripe } from "@/lib/stripe";
@@ -31,6 +34,21 @@ export async function POST(request: Request) {
 
   try {
     const stripe = getStripe();
+
+    // ¿Ya había empezado a pagar este reto y se salió? Se retoma su sesión
+    // en vez de abrir otra. Stripe las expira a las 24 h y entonces nace una
+    // nueva sola; una ya pagada nunca se reabre.
+    const galletas = await cookies();
+    const sesionPrevia = galletas.get(nombreCookiePago(slug))?.value;
+    if (sesionPrevia) {
+      const previa = await stripe.checkout.sessions
+        .retrieve(sesionPrevia)
+        .catch(() => null);
+      if (puedeReutilizarse(previa) && previa?.url) {
+        return NextResponse.redirect(previa.url, 303);
+      }
+    }
+
     const precios = await stripe.prices.list({
       lookup_keys: [slug],
       limit: 1,
@@ -50,8 +68,9 @@ export async function POST(request: Request) {
     });
     const promo = promos.data.find((p) => p.metadata?.reto === slug);
 
-    // SPEI exige un Customer existente; el correo y nombre reales los
-    // captura el Checkout y viven en customer_details de la sesión.
+    // Un Customer por sesión, no por clic: SPEI lo exige para asignar la
+    // CLABE, y gracias a la cookie de arriba dejan de acumularse clientes
+    // vacíos de gente que solo miró.
     const cliente = await stripe.customers.create(
       { metadata: { origen: "checkout-web", reto: slug } },
       { idempotencyKey: claveIdempotencia("cliente", slug, intento) },
@@ -67,7 +86,17 @@ export async function POST(request: Request) {
       }),
       { idempotencyKey: claveIdempotencia("sesion", slug, intento) },
     );
-    return NextResponse.redirect(session.url!, 303);
+
+    const respuesta = NextResponse.redirect(session.url!, 303);
+    // Caduca con la sesión: así el navegador y Stripe olvidan a la vez.
+    respuesta.cookies.set(nombreCookiePago(slug), session.id, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: origen.startsWith("https"),
+      expires: new Date((session.expires_at ?? 0) * 1000),
+      path: "/",
+    });
+    return respuesta;
   } catch (err) {
     console.error("checkout:", err);
     return volverConAviso(origen, slug, "error");

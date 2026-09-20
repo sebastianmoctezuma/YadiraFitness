@@ -145,6 +145,18 @@ Cuatro capas, de la más probable a la más grave:
    reto en otra sesión. No lo impide —eso pasa en Stripe, no aquí— pero evita
    que se descubra por un reclamo.
 
+La sesión de pago se **retoma**, no se duplica: al crearla se guarda su id en
+una cookie del reto, y si la clienta se sale y vuelve se le devuelve la misma
+pantalla de cobro mientras siga abierta. Una sesión ya pagada nunca se reabre
+—sería cobrar de nuevo— y Stripe las expira a las 24 h, así que al día
+siguiente nace una nueva sin que nadie lo decida. De paso deja de acumularse
+un Cliente de Stripe por cada clic.
+
+Los métodos de pago **no se fijan en el código**: los decide lo que esté activo
+en el dashboard de Stripe. Fijarlos rompía la cuenta live, donde la
+transferencia SPEI no está habilitada y el checkout ni siquiera abría. Activar
+OXXO o SPEI mañana no requiere tocar este repositorio.
+
 Los errores no se muestran como JSON: la ruta regresa a la página del reto con
 `?pago=error|cerrado` y [aviso-pago.tsx](components/ui/aviso-pago.tsx) lo lee en
 cliente, para que la página siga siendo estática.
