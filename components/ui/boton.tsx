@@ -64,23 +64,3 @@ export function Boton({
     </Link>
   );
 }
-
-/** Mismo lenguaje visual que Boton, pero envía el <form> que lo envuelve. */
-export function BotonSubmit({
-  children,
-  variante = "primario",
-  className = "",
-}: {
-  children: React.ReactNode;
-  variante?: Variante;
-  className?: string;
-}) {
-  return (
-    <button
-      type="submit"
-      className={`${base} ${variantes[variante]} cursor-pointer ${className}`}
-    >
-      {children}
-    </button>
-  );
-}

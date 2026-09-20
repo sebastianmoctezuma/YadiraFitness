@@ -18,6 +18,36 @@ export type FilaPago = {
   actualizado: string;
 };
 
+/**
+ * Clave de idempotencia para Stripe. El `intento` lo genera el navegador al
+ * cargar la página del reto, así que dos envíos del mismo formulario —doble
+ * clic, reenvío, reintento de red— comparten clave y Stripe devuelve LA MISMA
+ * sesión en vez de abrir otra. Viene de afuera: se sanea y se acota.
+ */
+export function claveIdempotencia(
+  proposito: string,
+  slug: string,
+  intento: string,
+): string {
+  const limpio = intento.replace(/[^a-zA-Z0-9-]/g, "").slice(0, 64);
+  return `${proposito}:${slug}:${limpio}`;
+}
+
+/**
+ * Un cobro doble genuino ocurre en Stripe, no aquí, y no se puede impedir
+ * desde el sitio. Esto solo lo hace visible: la fila nueva se marca cuando el
+ * mismo correo ya tiene cobrado ese reto en OTRA sesión.
+ */
+export function esPagoDuplicado(
+  fila: FilaPago,
+  previos: { stripe_session_id: string; estado: string }[],
+): boolean {
+  if (fila.estado !== "pagado" || !fila.email) return false;
+  return previos.some(
+    (p) => p.estado === "pagado" && p.stripe_session_id !== fila.stripe_session_id,
+  );
+}
+
 export function estadoDePago(
   tipoEvento: string,
   session: Stripe.Checkout.Session,
