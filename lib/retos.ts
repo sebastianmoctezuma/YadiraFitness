@@ -5,7 +5,8 @@ import type { Punto, Reto } from "./types";
  * resultados ni preguntas frecuentes: nada de eso existe todavía, y ponerlo
  * inventado es peor que no ponerlo.
  *
- * Sin precios ni fechas de inicio a propósito: no están definidos.
+ * Los precios los definió Yadira (2026-09-19); la fecha de inicio sigue sin
+ * definirse y por eso no aparece.
  *
  * Cuando conectemos Supabase, este archivo se reemplaza por una consulta a la
  * tabla `retos` y los componentes no cambian.
@@ -16,6 +17,8 @@ export const retos: Reto[] = [
     slug: "reto-30-dias",
     nombre: "Reto 30 días",
     duracionDias: 30,
+    precioMXN: 2500,
+    ventaAbierta: true,
     tagline: "Un mes para entrar al método",
     descripcion:
       "El mismo programa, en formato de un mes. Evaluación, plan de comidas, rutina personalizada y corrección de técnica, presencial o en línea.",
@@ -26,6 +29,8 @@ export const retos: Reto[] = [
     slug: "reto-90-dias",
     nombre: "Reto Transformación",
     duracionDias: 90,
+    precioMXN: 6500,
+    ventaAbierta: true,
     etiqueta: "El más completo y más pedido",
     tagline: "Noventa días de impacto",
     descripcion:

@@ -5,7 +5,8 @@ import { notFound } from "next/navigation";
 import { BarraMovil } from "@/components/secciones/barra-movil";
 import { Footer } from "@/components/secciones/footer";
 import { Header } from "@/components/secciones/header";
-import { Boton } from "@/components/ui/boton";
+import { Boton, BotonSubmit } from "@/components/ui/boton";
+import { precioMXN } from "@/lib/precio";
 import { getReto, incluye, retos, transformaciones } from "@/lib/retos";
 import { site, whatsappUrl } from "@/lib/site";
 import { etiquetaModalidad } from "@/lib/types";
@@ -106,18 +107,38 @@ export default async function RetoPage({ params }: Props) {
                 <h2 className="text-base font-bold text-ink">
                   Reserva tu cupo
                 </h2>
+                {reto.precioMXN && (
+                  <p className="mt-2 text-3xl font-extrabold tracking-[-0.02em] text-ink">
+                    {precioMXN(reto.precioMXN)}
+                  </p>
+                )}
                 <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-muted">
                   ¿Estás lista? Inscríbete ya. ¿Qué esperas? Mis cupos son
                   limitados: aprovecha y ve por tu mejor versión.
                 </p>
 
+                {reto.ventaAbierta ? (
+                  <form action="/api/checkout" method="POST" className="mt-6">
+                    <input type="hidden" name="reto" value={reto.slug} />
+                    <BotonSubmit className="w-full">
+                      Pagar y reservar mi cupo
+                    </BotonSubmit>
+                  </form>
+                ) : (
+                  <p className="mt-6 text-sm font-semibold text-ink">
+                    La venta de esta generación está cerrada. Escríbeme para
+                    apartar la siguiente.
+                  </p>
+                )}
+
                 <Boton
                   href={whatsappUrl(
-                    `Hola ${site.nombreCorto}, me interesa el ${reto.nombre} de ${reto.duracionDias} días.`,
+                    `Hola ${site.nombreCorto}, tengo una duda sobre el ${reto.nombre}.`,
                   )}
-                  className="mt-6 w-full"
+                  variante="secundario"
+                  className="mt-3 w-full"
                 >
-                  Escribir por WhatsApp
+                  Tengo una duda, WhatsApp
                 </Boton>
               </div>
             </div>

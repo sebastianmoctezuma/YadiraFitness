@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
 import { navegacion, site, whatsappUrl } from "@/lib/site";
 
@@ -81,7 +82,13 @@ export function Footer() {
       <div className="border-t border-bg/12">
         <div className="mx-auto flex max-w-[88rem] flex-col gap-4 px-5 py-7 text-xs text-bg/60 sm:flex-row sm:items-center sm:justify-between sm:px-8">
           <p>
-            © {anio} {site.nombre}.
+            © {anio} {site.nombre}. ·{" "}
+            <Link
+              href="/terminos"
+              className="underline-offset-4 hover:text-brand hover:underline"
+            >
+              Términos y privacidad
+            </Link>
           </p>
           <p className="max-w-[62ch]">
             Los planes de alimentación y entrenamiento no sustituyen atención
