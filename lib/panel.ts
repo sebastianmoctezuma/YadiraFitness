@@ -16,7 +16,11 @@ function iguales(a: string, b: string): boolean {
 }
 
 export function llaveValida(candidata: string | undefined): boolean {
-  const llave = process.env.PANEL_LLAVE;
+  // Se recorta de los dos lados: al pegar la llave en el panel de Vercel se
+  // cuela un espacio o un salto de línea con facilidad, y un acceso que
+  // falla por un carácter invisible es de lo más difícil de diagnosticar.
+  const llave = process.env.PANEL_LLAVE?.trim();
+  candidata = candidata?.trim();
   if (!llave) {
     // Hacia fuera esto es un 404 mudo, como debe ser. Pero sin esta línea,
     // "el panel no abre" y "la llave está mal" se ven idénticos en los

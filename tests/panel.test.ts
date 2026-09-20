@@ -28,3 +28,10 @@ test("una llave que no es la del panel no abre nada", () => {
   expect(llaveValida("la-buena-mas-larga")).toBe(false);
   expect(llaveValida(undefined)).toBe(false);
 });
+
+test("un espacio invisible al pegar la llave no deja fuera a nadie", () => {
+  process.env.PANEL_LLAVE = "la-buena \n";
+  expect(llaveValida("la-buena")).toBe(true);
+  expect(llaveValida(" la-buena ")).toBe(true);
+  expect(llaveValida("la-mala")).toBe(false);
+});
