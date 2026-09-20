@@ -18,6 +18,39 @@ export type FilaPago = {
   actualizado: string;
 };
 
+/**
+ * Qué decirle a la clienta al volver del checkout. No basta con "pagó o no":
+ * con OXXO se lleva una ficha que todavía tiene que ir a pagar, y sin darle
+ * el enlace a esa ficha se queda sin saber qué hacer.
+ */
+export type EstadoGracias =
+  | { tipo: "pagado" }
+  | { tipo: "oxxo"; vale: string | null }
+  | { tipo: "transferencia" }
+  | { tipo: "pendiente" };
+
+export function estadoGracias(
+  session: Stripe.Checkout.Session,
+): EstadoGracias {
+  if (session.payment_status === "paid") return { tipo: "pagado" };
+
+  // Solo viene si la sesión se pidió con el payment_intent expandido.
+  const intent =
+    typeof session.payment_intent === "object" ? session.payment_intent : null;
+  const siguiente = intent?.next_action;
+
+  if (siguiente?.type === "oxxo_display_details") {
+    return {
+      tipo: "oxxo",
+      vale: siguiente.oxxo_display_details?.hosted_voucher_url ?? null,
+    };
+  }
+  if (siguiente?.type === "display_bank_transfer_instructions") {
+    return { tipo: "transferencia" };
+  }
+  return { tipo: "pendiente" };
+}
+
 /** Dónde se recuerda la sesión de pago abierta de cada reto. */
 export const nombreCookiePago = (slug: string) => `pago_${slug}`;
 
