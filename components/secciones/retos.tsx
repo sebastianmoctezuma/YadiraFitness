@@ -17,8 +17,9 @@ export function Retos() {
             Elige cuánto trabajamos juntas
           </h2>
           <p className="max-w-[38ch] text-base text-ink-muted">
-            Los dos retos incluyen lo mismo. Cambia el tiempo que dura el
-            acompañamiento.
+            Todos incluyen evaluación, plan de comidas y rutina
+            personalizada. Cambia cuánto dura el acompañamiento y si además
+            te preparamos la comida.
           </p>
         </Reveal>
 
@@ -34,10 +35,10 @@ export function Retos() {
                     className="type-display text-[clamp(3.5rem,10vw,6rem)] text-ink transition-colors duration-300 group-hover:text-brand-text"
                     style={{ fontVariationSettings: '"wdth" 118' }}
                   >
-                    {reto.duracionDias}
+                    {reto.duracion.numero}
                   </span>
                   <span className="text-xs font-bold tracking-[0.14em] text-ink-muted uppercase">
-                    días
+                    {reto.duracion.unidad}
                   </span>
                 </div>
 
@@ -84,8 +85,8 @@ export function Retos() {
         </ul>
 
         <p className="mt-8 max-w-[54ch] text-sm text-ink-muted">
-          Los cupos son limitados porque el entrenamiento es personal. El precio
-          y la fecha de arranque se confirman por WhatsApp.
+          Los cupos son limitados porque el entrenamiento es personal. La fecha
+          de arranque se confirma por WhatsApp.
         </p>
       </div>
     </section>

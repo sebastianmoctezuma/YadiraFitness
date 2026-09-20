@@ -11,7 +11,8 @@ export type Reto = {
   /** Identificador en la URL: /retos/reto-90-dias */
   slug: string;
   nombre: string;
-  duracionDias: 30 | 90;
+  /** Cuánto dura, tal como se anuncia: 30 días, 90 días, 4 semanas. */
+  duracion: { numero: number; unidad: "días" | "semanas" };
   tagline: string;
   descripcion: string;
   /** Precio publicado, en pesos. La fecha de inicio sigue sin definirse y la

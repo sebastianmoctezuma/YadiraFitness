@@ -16,7 +16,7 @@ export const retos: Reto[] = [
   {
     slug: "reto-30-dias",
     nombre: "Reto 30 días",
-    duracionDias: 30,
+    duracion: { numero: 30, unidad: "días" },
     precioMXN: 2500,
     ventaAbierta: true,
     tagline: "Un mes para entrar al método",
@@ -26,9 +26,22 @@ export const retos: Reto[] = [
     activo: true,
   },
   {
+    slug: "reto-con-comida",
+    nombre: "Reto con comida",
+    duracion: { numero: 4, unidad: "semanas" },
+    precioMXN: 6500,
+    ventaAbierta: true,
+    etiqueta: "Todo incluido",
+    tagline: "Cuatro semanas sin pensar en qué comer",
+    descripcion:
+      "El programa de cuatro semanas con tus alimentos incluidos: se preparan en nuestra cocina para que tú solo te ocupes de entrenar.",
+    modalidad: "presencial",
+    activo: true,
+  },
+  {
     slug: "reto-90-dias",
     nombre: "Reto Transformación",
-    duracionDias: 90,
+    duracion: { numero: 90, unidad: "días" },
     precioMXN: 6500,
     ventaAbierta: true,
     etiqueta: "El más completo y más pedido",
