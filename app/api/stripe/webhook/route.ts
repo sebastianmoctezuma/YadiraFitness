@@ -1,5 +1,7 @@
 import type Stripe from "stripe";
+import { enviarAviso, mensajeDePago } from "@/lib/avisos";
 import { esPagoDuplicado, sesionAFila } from "@/lib/pagos";
+import { getReto } from "@/lib/retos";
 import { getStripe } from "@/lib/stripe";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
@@ -33,6 +35,7 @@ export async function POST(request: Request) {
     // ¿Esta persona ya tenía cobrado este reto? Si el cobro doble ocurrió,
     // la fila queda marcada para que Yadira lo vea y reembolse en Stripe.
     let duplicado = false;
+    let yaAvisado = false;
     if (fila.estado === "pagado" && fila.email) {
       const { data: previos, error } = await supabase
         .from("pagos")
@@ -43,6 +46,13 @@ export async function POST(request: Request) {
         console.error("webhook: no se pudo revisar pagos previos", error);
         return new Response("Error al revisar duplicados", { status: 500 });
       }
+      // Si esta misma sesión ya constaba como pagada, el evento es un
+      // reintento de Stripe: no hay que volver a avisar.
+      yaAvisado = (previos ?? []).some(
+        (p) =>
+          p.stripe_session_id === fila.stripe_session_id &&
+          p.estado === "pagado",
+      );
       duplicado = esPagoDuplicado(fila, previos ?? []);
       if (duplicado) {
         console.warn(
@@ -59,6 +69,16 @@ export async function POST(request: Request) {
     if (error) {
       console.error("webhook: error al registrar en Supabase", error);
       return new Response("Error al registrar", { status: 500 });
+    }
+
+    // Después de registrar, nunca antes: el aviso puede fallar sin
+    // consecuencias, perder el pago no.
+    if (fila.estado === "pagado" && !yaAvisado) {
+      const nombreReto = getReto(fila.reto)?.nombre ?? fila.reto;
+      await enviarAviso(
+        mensajeDePago(fila, nombreReto) +
+          (duplicado ? "\n⚠️ Ojo: esta persona ya había pagado este reto." : ""),
+      );
     }
   }
 
