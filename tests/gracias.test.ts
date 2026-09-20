@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import type Stripe from "stripe";
-import { estadoGracias } from "@/lib/pagos";
+import { comprobanteDe, estadoGracias } from "@/lib/pagos";
 
 const sesion = (extra: object) =>
   ({ payment_status: "unpaid", ...extra }) as unknown as Stripe.Checkout.Session;
@@ -49,4 +49,27 @@ test("un pago pagado manda aunque traiga next_action vieja", () => {
     payment_intent: { next_action: { type: "oxxo_display_details" } },
   });
   expect(estadoGracias(s)).toEqual({ tipo: "pagado" });
+});
+
+test("cuando hay cargo, se ofrece su comprobante de Stripe", () => {
+  const s = {
+    payment_status: "paid",
+    payment_intent: {
+      latest_charge: { receipt_url: "https://pay.stripe.com/receipts/abc123" },
+    },
+  } as unknown as Stripe.Checkout.Session;
+  expect(comprobanteDe(s)).toBe("https://pay.stripe.com/receipts/abc123");
+});
+
+test("sin cargo todavía (OXXO sin pagar) no hay comprobante que ofrecer", () => {
+  const s = {
+    payment_status: "unpaid",
+    payment_intent: { latest_charge: null },
+  } as unknown as Stripe.Checkout.Session;
+  expect(comprobanteDe(s)).toBe(null);
+});
+
+test("si la sesión no viene expandida, no se inventa un enlace", () => {
+  const s = { payment_intent: "pi_123" } as unknown as Stripe.Checkout.Session;
+  expect(comprobanteDe(s)).toBe(null);
 });

@@ -51,6 +51,25 @@ export function estadoGracias(
   return { tipo: "pendiente" };
 }
 
+/**
+ * El comprobante del cobro, alojado por Stripe: la clienta lo ve, lo descarga
+ * en PDF y le sirve de respaldo de lo que pagó. No es una factura fiscal
+ * (eso es CFDI y Stripe no lo emite), pero es el acuse que la gente espera.
+ *
+ * Solo existe cuando ya hubo cargo: con una ficha de OXXO sin pagar todavía
+ * no hay nada que enseñar. Requiere la sesión con `payment_intent.latest_charge`
+ * expandido.
+ */
+export function comprobanteDe(
+  session: Stripe.Checkout.Session,
+): string | null {
+  const intent =
+    typeof session.payment_intent === "object" ? session.payment_intent : null;
+  const cargo = intent?.latest_charge;
+  if (!cargo || typeof cargo === "string") return null;
+  return cargo.receipt_url ?? null;
+}
+
 /** Dónde se recuerda la sesión de pago abierta de cada reto. */
 export const nombreCookiePago = (slug: string) => `pago_${slug}`;
 

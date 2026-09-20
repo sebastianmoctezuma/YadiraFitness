@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/secciones/footer";
 import { Header } from "@/components/secciones/header";
 import { Boton } from "@/components/ui/boton";
-import { estadoGracias } from "@/lib/pagos";
+import { comprobanteDe, estadoGracias } from "@/lib/pagos";
 import { site, whatsappUrl } from "@/lib/site";
 import { getStripe } from "@/lib/stripe";
 
@@ -25,7 +25,8 @@ export default async function GraciasPage({
     // El payment_intent expandido es lo que dice si quedó una ficha de OXXO
     // pendiente y dónde está; sin él solo sabríamos que "no ha pagado".
     session = await getStripe().checkout.sessions.retrieve(session_id, {
-      expand: ["payment_intent"],
+      // latest_charge trae el comprobante que la clienta puede descargar.
+      expand: ["payment_intent", "payment_intent.latest_charge"],
     });
   } catch {
     notFound();
@@ -33,6 +34,8 @@ export default async function GraciasPage({
 
   const estado = estadoGracias(session);
   const nombre = session.customer_details?.name ?? "";
+  const comprobante = comprobanteDe(session);
+  const correo = session.customer_details?.email;
 
   const textos = {
     pagado: {
@@ -82,9 +85,22 @@ export default async function GraciasPage({
             {textos.cuerpo}
           </p>
 
+          {correo && pagado && (
+            <p className="mt-4 max-w-[52ch] text-[0.95rem] text-ink-muted">
+              Te mandamos el comprobante a{" "}
+              <span className="font-semibold text-ink">{correo}</span>. Si no
+              aparece, revisa tu carpeta de spam.
+            </p>
+          )}
+
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             {estado.tipo === "oxxo" && estado.vale && (
               <Boton href={estado.vale}>Ver mi ficha de pago</Boton>
+            )}
+            {comprobante && (
+              <Boton href={comprobante} variante="secundario">
+                Ver mi comprobante
+              </Boton>
             )}
             <Boton
               href={whatsappUrl(
