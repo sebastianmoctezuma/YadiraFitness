@@ -75,6 +75,8 @@ test("construirParamsCheckout arma la sesión con SPEI y modalidad", () => {
   expect(params.payment_method_types).toBeUndefined();
   expect(params.payment_method_options).toBeUndefined();
   expect(params.customer).toBe("cus_123");
+  // Sin reembolsos, aceptar los términos no puede ser opcional.
+  expect(params.consent_collection).toEqual({ terms_of_service: "required" });
   expect(params.phone_number_collection).toEqual({ enabled: true });
   expect(params.success_url).toBe(
     "http://localhost:3000/gracias?session_id={CHECKOUT_SESSION_ID}",

@@ -9,6 +9,13 @@ export const metadata: Metadata = {
     "Condiciones de compra, política de reembolsos y aviso de privacidad de los retos.",
 };
 
+const ancla = (titulo: string) =>
+  titulo
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-");
+
 /* Borrador operativo: Yadira debe validarlo antes de considerarlo final. */
 const secciones = [
   {
@@ -26,7 +33,8 @@ const secciones = [
   {
     titulo: "Reembolsos",
     parrafos: [
-      "Si aún no arranca tu reto, puedes pedir reembolso completo escribiéndonos por WhatsApp. Una vez iniciado el programa, el pago no es reembolsable, porque el cupo y el plan se preparan de forma personal para ti. Si tu transferencia SPEI no se completa, no se hace ningún cargo.",
+      "El pago no es reembolsable. Al reservar apartas tu cupo en la generación y tu plan de comidas y entrenamiento se arma de forma personal para ti, así que una vez hecho el pago no hay devoluciones.",
+      "Si tu ficha de OXXO vence o tu transferencia no se completa, no se hace ningún cargo: simplemente no quedó reservado tu cupo.",
     ],
   },
   {
@@ -53,7 +61,9 @@ export default function TerminosPage() {
             Términos, reembolsos y privacidad
           </h1>
           {secciones.map((s) => (
-            <section key={s.titulo} className="mt-10">
+            /* Con ancla: el checkout de Stripe enlaza "Política de privacidad"
+               directo a su sección, no al principio de la página. */
+            <section key={s.titulo} id={ancla(s.titulo)} className="mt-10 scroll-mt-28">
               <h2 className="text-h3 font-bold text-ink">{s.titulo}</h2>
               {s.parrafos.map((p) => (
                 <p

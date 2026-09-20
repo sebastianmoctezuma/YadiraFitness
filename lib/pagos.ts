@@ -147,6 +147,11 @@ export function construirParamsCheckout(opts: {
     // transferencia SPEI no está habilitada y el checkout ni se abría.
     // Activar OXXO o SPEI mañana no requiere tocar este archivo.
     customer: opts.customerId,
+    // Sin reembolsos, la aceptación tiene que ser explícita y quedar
+    // registrada: Stripe guarda en la sesión que esta persona marcó la
+    // casilla, que es lo que se enseña si algún día disputa el cargo.
+    // La URL de los términos se configura en el dashboard de Stripe.
+    consent_collection: { terms_of_service: "required" },
     phone_number_collection: { enabled: true },
     custom_fields: [
       {
