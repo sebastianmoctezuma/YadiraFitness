@@ -13,7 +13,7 @@ test("un teléfono con formato raro se deja como está, no se inventa", () => {
 
 test("el enlace de WhatsApp lleva el número limpio y el mensaje", () => {
   const url = enlaceWhatsapp("+52 833 777 8899", "Hola");
-  expect(url).toBe("https://wa.me/528337778899?text=Hola");
+  expect(url).toBe("whatsapp://send?phone=528337778899&text=Hola");
 });
 
 test("sin teléfono no hay enlace que ofrecer", () => {
