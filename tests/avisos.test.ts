@@ -59,3 +59,13 @@ test("avisa cuando el pago trae descuento aplicado", () => {
   expect(texto).toContain("$5,200 MXN");
   expect(texto).toContain("descuento");
 });
+
+test("cuando hay panel, el aviso manda ahí en vez de a Stripe", () => {
+  const texto = mensajeDePago(
+    fila(),
+    "Reto Transformación",
+    "https://yadira-fitness.vercel.app/panel/entrar?k=secreta",
+  );
+  expect(texto).toContain("/panel/entrar?k=secreta");
+  expect(texto).not.toContain("dashboard.stripe.com");
+});

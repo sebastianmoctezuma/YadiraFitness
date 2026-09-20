@@ -75,8 +75,12 @@ export async function POST(request: Request) {
     // consecuencias, perder el pago no.
     if (fila.estado === "pagado" && !yaAvisado) {
       const nombreReto = getReto(fila.reto)?.nombre ?? fila.reto;
+      const llave = process.env.PANEL_LLAVE;
+      const panel = llave
+        ? `${new URL(request.url).origin}/panel/entrar?k=${llave}`
+        : undefined;
       await enviarAviso(
-        mensajeDePago(fila, nombreReto) +
+        mensajeDePago(fila, nombreReto, panel) +
           (duplicado ? "\n⚠️ Ojo: esta persona ya había pagado este reto." : ""),
       );
     }

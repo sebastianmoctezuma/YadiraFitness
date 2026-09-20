@@ -13,10 +13,18 @@ import type { FilaPago } from "./pagos";
 const pesos = (centavos: number) =>
   `$${(centavos / 100).toLocaleString("es-MX")} MXN`;
 
-export function mensajeDePago(fila: FilaPago, nombreReto: string): string {
-  const enlace = fila.stripe_payment_intent
-    ? `https://dashboard.stripe.com/payments/${fila.stripe_payment_intent}`
-    : "https://dashboard.stripe.com/payments";
+export function mensajeDePago(
+  fila: FilaPago,
+  nombreReto: string,
+  enlacePanel?: string,
+): string {
+  // El panel gana al dashboard de Stripe: ahí los datos están ordenados para
+  // ella y con el botón para escribirle a la clienta.
+  const enlace =
+    enlacePanel ??
+    (fila.stripe_payment_intent
+      ? `https://dashboard.stripe.com/payments/${fila.stripe_payment_intent}`
+      : "https://dashboard.stripe.com/payments");
 
   const lineas = [
     `Nuevo pago: ${nombreReto}`,
