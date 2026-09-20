@@ -160,3 +160,21 @@ OXXO o SPEI mañana no requiere tocar este repositorio.
 Los errores no se muestran como JSON: la ruta regresa a la página del reto con
 `?pago=error|cerrado` y [aviso-pago.tsx](components/ui/aviso-pago.tsx) lo lee en
 cliente, para que la página siga siendo estática.
+
+### Aviso a Yadira cuando entra un pago
+
+[lib/avisos.ts](lib/avisos.ts) manda un WhatsApp por CallMeBot desde el
+webhook, después de registrar el pago y nunca antes: el aviso puede fallar sin
+consecuencias, perder el pago no.
+
+**El mensaje no lleva nombre, correo ni teléfono.** CallMeBot es un tercero al
+que la clienta no autorizó nada, y el aviso de privacidad que ella acepta al
+pagar dice que sus datos no salen de quien procesa el cobro. El aviso lleva el
+reto, el importe, la modalidad y el enlace al cargo en Stripe, donde Yadira ve
+todo con un toque. Las pruebas de `tests/avisos.test.ts` fallan si alguien
+agrega un dato personal al mensaje.
+
+Se activa con `CALLMEBOT_TELEFONO` y `CALLMEBOT_APIKEY`; sin ellas no se envía
+nada y el pago se registra igual. Solo avisa cuando el pago pasa a `pagado` y
+no estaba ya registrado como tal, así que los reintentos de Stripe no repiten
+el mensaje.
