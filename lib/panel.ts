@@ -17,7 +17,14 @@ function iguales(a: string, b: string): boolean {
 
 export function llaveValida(candidata: string | undefined): boolean {
   const llave = process.env.PANEL_LLAVE;
-  if (!llave || !candidata) return false;
+  if (!llave) {
+    // Hacia fuera esto es un 404 mudo, como debe ser. Pero sin esta línea,
+    // "el panel no abre" y "la llave está mal" se ven idénticos en los
+    // registros, y son problemas distintos.
+    console.warn("panel: falta la variable PANEL_LLAVE; nadie puede entrar");
+    return false;
+  }
+  if (!candidata) return false;
   return iguales(candidata, llave);
 }
 
