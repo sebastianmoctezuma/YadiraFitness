@@ -18,6 +18,11 @@ const esLive = (process.env.STRIPE_SECRET_KEY || "").startsWith("sk_live");
 const RETOS = [
   { lookup: "reto-30-dias", nombre: "Reto 30 días", monto: 250000 },
   {
+    lookup: "reto-con-comida",
+    nombre: "Reto con comida (4 semanas)",
+    monto: 650000,
+  },
+  {
     lookup: "reto-90-dias",
     nombre: "Reto Transformación (90 días)",
     monto: 650000,

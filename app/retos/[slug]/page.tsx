@@ -55,10 +55,10 @@ export default async function RetoPage({ params }: Props) {
                   className="type-display text-[clamp(4rem,11vw,7rem)] text-ink"
                   style={{ fontVariationSettings: '"wdth" 118' }}
                 >
-                  {reto.duracionDias}
+                  {reto.duracion.numero}
                 </span>
                 <span className="text-sm font-bold tracking-[0.14em] text-ink-muted uppercase">
-                  días
+                  {reto.duracion.unidad}
                 </span>
               </div>
 
