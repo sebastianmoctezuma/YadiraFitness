@@ -1,24 +1,33 @@
 import { NextResponse } from "next/server";
-import { CODIGO_ANTICIPADO, construirParamsCheckout } from "@/lib/pagos";
+import {
+  CODIGO_ANTICIPADO,
+  claveIdempotencia,
+  construirParamsCheckout,
+} from "@/lib/pagos";
 import { getReto } from "@/lib/retos";
 import { getStripe } from "@/lib/stripe";
+
+/** Vuelve a la página del reto con un aviso que la clienta pueda leer; un
+    JSON crudo en pantalla blanca solo invita a reintentar a lo bruto. */
+const volverConAviso = (origen: string, slug: string, aviso: string) =>
+  NextResponse.redirect(`${origen}/retos/${slug}?pago=${aviso}`, 303);
 
 export async function POST(request: Request) {
   const form = await request.formData();
   const slug = String(form.get("reto") ?? "");
+  const origen = new URL(request.url).origin;
   const reto = getReto(slug);
 
   if (!reto) {
-    return NextResponse.json({ error: "Reto no encontrado" }, { status: 404 });
+    return NextResponse.redirect(`${origen}/#retos`, 303);
   }
   if (!reto.ventaAbierta) {
-    return NextResponse.json(
-      { error: "La venta de este reto está cerrada por ahora" },
-      { status: 409 },
-    );
+    return volverConAviso(origen, slug, "cerrado");
   }
 
-  const origen = new URL(request.url).origin;
+  // Lo pone el navegador al cargar la página. Sin JS llega vacío y cada
+  // envío es un intento nuevo, que es el comportamiento de siempre.
+  const intento = String(form.get("intento") ?? "") || crypto.randomUUID();
 
   try {
     const stripe = getStripe();
@@ -29,10 +38,7 @@ export async function POST(request: Request) {
     const precio = precios.data[0];
     if (!precio) {
       console.error(`checkout: no hay precio con lookup_key ${slug}`);
-      return NextResponse.json(
-        { error: "El pago no está disponible en este momento" },
-        { status: 500 },
-      );
+      return volverConAviso(origen, slug, "error");
     }
 
     // El 20% anticipado se aplica solo si el code está activo en Stripe y
@@ -46,9 +52,10 @@ export async function POST(request: Request) {
 
     // SPEI exige un Customer existente; el correo y nombre reales los
     // captura el Checkout y viven en customer_details de la sesión.
-    const cliente = await stripe.customers.create({
-      metadata: { origen: "checkout-web", reto: slug },
-    });
+    const cliente = await stripe.customers.create(
+      { metadata: { origen: "checkout-web", reto: slug } },
+      { idempotencyKey: claveIdempotencia("cliente", slug, intento) },
+    );
 
     const session = await stripe.checkout.sessions.create(
       construirParamsCheckout({
@@ -58,13 +65,11 @@ export async function POST(request: Request) {
         customerId: cliente.id,
         promotionCodeId: promo?.id,
       }),
+      { idempotencyKey: claveIdempotencia("sesion", slug, intento) },
     );
     return NextResponse.redirect(session.url!, 303);
   } catch (err) {
     console.error("checkout:", err);
-    return NextResponse.json(
-      { error: "No pudimos iniciar tu pago. Intenta de nuevo." },
-      { status: 500 },
-    );
+    return volverConAviso(origen, slug, "error");
   }
 }

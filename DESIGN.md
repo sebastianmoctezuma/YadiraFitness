@@ -128,3 +128,23 @@ se activa/desactiva desde el dashboard, sin deploys. El catálogo de Stripe se
 da de alta con `node --env-file=.env.local scripts/stripe-setup.mjs`
 (idempotente; correr también en live al activar la cuenta). El cierre de
 ventas es manual: `ventaAbierta` en [lib/retos.ts](lib/retos.ts).
+
+### Contra el cobro doble
+
+Cuatro capas, de la más probable a la más grave:
+
+1. **El botón se bloquea al primer clic** ([components/ui/forma-pago.tsx](components/ui/forma-pago.tsx)).
+   Cada envío abre una sesión de pago distinta, así que un doble clic dejaba
+   dos pestañas de cobro vivas.
+2. **`onSubmit` cancela envíos posteriores**, porque el bloqueo visual depende
+   de que React alcance a repintar.
+3. **Clave de idempotencia** derivada del campo `intento` (nace en el navegador
+   con la página): si aun así llegan dos peticiones, Stripe devuelve la misma
+   sesión en vez de abrir otra.
+4. **El webhook marca `duplicado`** cuando el mismo correo ya tiene cobrado ese
+   reto en otra sesión. No lo impide —eso pasa en Stripe, no aquí— pero evita
+   que se descubra por un reclamo.
+
+Los errores no se muestran como JSON: la ruta regresa a la página del reto con
+`?pago=error|cerrado` y [aviso-pago.tsx](components/ui/aviso-pago.tsx) lo lee en
+cliente, para que la página siga siendo estática.

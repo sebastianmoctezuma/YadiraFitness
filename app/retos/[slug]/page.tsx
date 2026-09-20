@@ -5,7 +5,10 @@ import { notFound } from "next/navigation";
 import { BarraMovil } from "@/components/secciones/barra-movil";
 import { Footer } from "@/components/secciones/footer";
 import { Header } from "@/components/secciones/header";
-import { Boton, BotonSubmit } from "@/components/ui/boton";
+import { Suspense } from "react";
+import { AvisoPago } from "@/components/ui/aviso-pago";
+import { Boton } from "@/components/ui/boton";
+import { FormaPago } from "@/components/ui/forma-pago";
 import { precioMXN } from "@/lib/precio";
 import { getReto, incluye, retos, transformaciones } from "@/lib/retos";
 import { site, whatsappUrl } from "@/lib/site";
@@ -117,13 +120,14 @@ export default async function RetoPage({ params }: Props) {
                   limitados: aprovecha y ve por tu mejor versión.
                 </p>
 
+                {/* El aviso vive en cliente, así que la página no deja de
+                    ser estática por leer un parámetro que casi nunca viene. */}
+                <Suspense>
+                  <AvisoPago />
+                </Suspense>
+
                 {reto.ventaAbierta ? (
-                  <form action="/api/checkout" method="POST" className="mt-6">
-                    <input type="hidden" name="reto" value={reto.slug} />
-                    <BotonSubmit className="w-full">
-                      Pagar y reservar mi cupo
-                    </BotonSubmit>
-                  </form>
+                  <FormaPago slug={reto.slug} />
                 ) : (
                   <p className="mt-6 text-sm font-semibold text-ink">
                     La venta de esta generación está cerrada. Escríbeme para
