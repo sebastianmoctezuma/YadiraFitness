@@ -17,10 +17,15 @@ const variantes: Record<Variante, string> = {
 /**
  * Los enlaces de ancla y los externos se renderizan como <a> nativo.
  *
- * `<Link>` de Next con un href de solo ancla intercepta la navegación y su
+ * `<Link>` de Next con un href de ancla intercepta la navegación y su
  * restauración de scroll compite con `scroll-behavior: smooth`: a veces no
  * desplaza, y al reclicar el mismo hash nunca lo hace. El <a> nativo desplaza
  * siempre, incluso si la URL ya trae ese hash.
+ *
+ * Las anclas van como `/#seccion`, no `#seccion`: esas secciones solo existen
+ * en la portada, y desde la página de un reto un ancla suelta no lleva a
+ * ninguna parte —el menú parecía roto—. Con la ruta por delante, el navegador
+ * desplaza si ya estás en la portada y navega si vienes de otro lado.
  */
 export function Boton({
   href,
@@ -34,7 +39,7 @@ export function Boton({
   className?: string;
 }) {
   const clases = `${base} ${variantes[variante]} ${className}`;
-  const esAncla = href.startsWith("#");
+  const esAncla = href.startsWith("#") || href.startsWith("/#");
   const esExterno = href.startsWith("http");
 
   if (esAncla) {

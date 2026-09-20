@@ -37,7 +37,7 @@ export function Hero() {
           {/* En móvil los botones van a ancho completo: así quedan alineados
               con el bloque de texto en vez de flotar desiguales a la izquierda. */}
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <Boton href="#retos" className="w-full sm:w-auto">
+            <Boton href="/#retos" className="w-full sm:w-auto">
               Ver los retos
             </Boton>
             {/* Se llama por lo que hace, no "Reservar mi cupo": ese texto lleva
