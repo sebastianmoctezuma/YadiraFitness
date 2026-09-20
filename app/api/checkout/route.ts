@@ -1,7 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import {
-  CODIGO_ANTICIPADO,
   claveIdempotencia,
   construirParamsCheckout,
   nombreCookiePago,
@@ -59,13 +58,11 @@ export async function POST(request: Request) {
       return volverConAviso(origen, slug, "error");
     }
 
-    // El 20% anticipado se aplica solo si el code está activo en Stripe y
-    // este reto es el suyo. Encenderlo/apagarlo es cosa del dashboard.
-    const promos = await stripe.promotionCodes.list({
-      code: CODIGO_ANTICIPADO,
-      active: true,
-      limit: 1,
-    });
+    // Cualquier promoción ACTIVA marcada para este reto se aplica sola. Se
+    // buscan todas y no una por nombre: así Yadira puede crear la promoción
+    // que quiera desde el dashboard —el 20% anticipado, una de temporada—
+    // poniéndole `reto` en la metadata, sin que nadie toque este archivo.
+    const promos = await stripe.promotionCodes.list({ active: true, limit: 100 });
     const promo = promos.data.find((p) => p.metadata?.reto === slug);
 
     // Un Customer por sesión, no por clic: SPEI lo exige para asignar la
