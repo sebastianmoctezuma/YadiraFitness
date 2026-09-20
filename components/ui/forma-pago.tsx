@@ -19,7 +19,17 @@ const base =
  * Sin JavaScript el formulario sigue funcionando como envío nativo de toda la
  * vida; solo se pierden el bloqueo y la clave.
  */
-export function FormaPago({ slug }: { slug: string }) {
+export function FormaPago({
+  slug,
+  etiqueta = "Pagar y reservar mi cupo",
+  claseForm = "mt-6",
+  claseBoton = "w-full bg-brand text-ink shadow-[0_6px_20px_-6px_oklch(0.875_0.183_99_/_0.9)] hover:bg-ink hover:text-brand hover:shadow-none active:translate-y-px disabled:cursor-wait disabled:bg-ink disabled:text-brand disabled:shadow-none",
+}: {
+  slug: string;
+  etiqueta?: string;
+  claseForm?: string;
+  claseBoton?: string;
+}) {
   const [enviando, setEnviando] = useState(false);
   const [intento, setIntento] = useState("");
 
@@ -33,7 +43,7 @@ export function FormaPago({ slug }: { slug: string }) {
     <form
       action="/api/checkout"
       method="POST"
-      className="mt-6"
+      className={claseForm}
       onSubmit={(e) => {
         if (enviando) {
           e.preventDefault();
@@ -48,9 +58,9 @@ export function FormaPago({ slug }: { slug: string }) {
         type="submit"
         disabled={enviando}
         aria-busy={enviando}
-        className={`${base} w-full bg-brand text-ink shadow-[0_6px_20px_-6px_oklch(0.875_0.183_99_/_0.9)] hover:bg-ink hover:text-brand hover:shadow-none active:translate-y-px disabled:cursor-wait disabled:bg-ink disabled:text-brand disabled:shadow-none`}
+        className={`${base} ${claseBoton}`}
       >
-        {enviando ? "Preparando tu pago…" : "Pagar y reservar mi cupo"}
+        {enviando ? "Preparando tu pago…" : etiqueta}
       </button>
     </form>
   );
