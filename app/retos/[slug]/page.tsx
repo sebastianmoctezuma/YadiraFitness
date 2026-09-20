@@ -150,7 +150,7 @@ export default async function RetoPage({ params }: Props) {
         </div>
       </main>
       <Footer />
-      <BarraMovil />
+      <BarraMovil reto={reto} />
     </>
   );
 }
