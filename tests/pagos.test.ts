@@ -70,7 +70,10 @@ test("construirParamsCheckout arma la sesión con SPEI y modalidad", () => {
   });
   expect(params.mode).toBe("payment");
   expect(params.line_items).toEqual([{ price: "price_abc", quantity: 1 }]);
-  expect(params.payment_method_types).toEqual(["card", "customer_balance"]);
+  // Sin métodos fijos: manda el dashboard de Stripe. Fijarlos hacía que la
+  // cuenta live rechazara la sesión por un método no habilitado ahí.
+  expect(params.payment_method_types).toBeUndefined();
+  expect(params.payment_method_options).toBeUndefined();
   expect(params.customer).toBe("cus_123");
   expect(params.phone_number_collection).toEqual({ enabled: true });
   expect(params.success_url).toBe(
