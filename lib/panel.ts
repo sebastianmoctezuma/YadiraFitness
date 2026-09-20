@@ -53,12 +53,19 @@ export function formatearTelefono(telefono: string | null): string {
   return telefono;
 }
 
-/** Cada clienta con su enlace listo para escribirle sin teclear el número. */
+/**
+ * Cada clienta con su enlace listo para escribirle sin teclear el número.
+ *
+ * Abre la app directamente (`whatsapp://`) en vez de pasar por wa.me, que
+ * mete una pantalla intermedia de "continuar al chat". Este panel lo usa solo
+ * Yadira, que obviamente tiene WhatsApp instalado; para las clientas, en el
+ * sitio público, se sigue usando wa.me porque ahí sí puede no estar.
+ */
 export function enlaceWhatsapp(
   telefono: string | null,
   mensaje: string,
 ): string | null {
   const digitos = (telefono ?? "").replace(/\D/g, "");
   if (digitos.length < 10) return null;
-  return `https://wa.me/${digitos}?text=${encodeURIComponent(mensaje)}`;
+  return `whatsapp://send?phone=${digitos}&text=${encodeURIComponent(mensaje)}`;
 }

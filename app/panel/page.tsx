@@ -160,8 +160,6 @@ export default async function PanelPage() {
                     {wa && (
                       <a
                         href={wa}
-                        target="_blank"
-                        rel="noopener noreferrer"
                         className="inline-flex min-h-11 items-center gap-2.5 rounded-full bg-[#25D366] px-5 text-sm font-bold uppercase tracking-[0.06em] text-white transition-colors hover:bg-[#1da851]"
                       >
                         <IconoWhatsapp />
