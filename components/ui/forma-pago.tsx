@@ -19,6 +19,36 @@ const base =
  * Sin JavaScript el formulario sigue funcionando como envío nativo de toda la
  * vida; solo se pierden el bloqueo y la clave.
  */
+
+/**
+ * El giro es el único aviso de que algo está pasando mientras Stripe
+ * responde. Quien pidió menos movimiento ve el círculo quieto: el texto
+ * "Preparando tu pago…" ya dice lo mismo sin marear.
+ */
+const Girito = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden
+    className="h-[18px] w-[18px] motion-safe:animate-spin"
+  >
+    <circle
+      cx="12"
+      cy="12"
+      r="9"
+      stroke="currentColor"
+      strokeWidth="3"
+      className="opacity-25"
+    />
+    <path
+      d="M21 12a9 9 0 0 0-9-9"
+      stroke="currentColor"
+      strokeWidth="3"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
 export function FormaPago({
   slug,
   etiqueta = "Pagar y reservar mi cupo",
@@ -60,7 +90,14 @@ export function FormaPago({
         aria-busy={enviando}
         className={`${base} ${claseBoton}`}
       >
-        {enviando ? "Preparando tu pago…" : etiqueta}
+        {enviando ? (
+          <>
+            <Girito />
+            Preparando tu pago…
+          </>
+        ) : (
+          etiqueta
+        )}
       </button>
     </form>
   );
