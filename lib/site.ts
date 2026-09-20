@@ -14,7 +14,7 @@ export const site = {
   instagramUsuario: "@la_guerrera_yadira",
   tiktok: "https://tiktok.com/@yadirahernandez1984",
   tiktokUsuario: "@yadirahernandez1984",
-  facebook: "https://facebook.com/",
+  facebook: "https://www.facebook.com/yadira.hernandez.322589",
   facebookUsuario: "Yadira Hernandez",
   descripcion:
     "Gym privado exclusivo de mujeres, a puerta cerrada. Entrenamiento personal presencial y en línea, con cocina propia para elaborar tu dieta.",
