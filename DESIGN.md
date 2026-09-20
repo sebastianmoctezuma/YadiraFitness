@@ -178,3 +178,19 @@ Se activa con `CALLMEBOT_TELEFONO` y `CALLMEBOT_APIKEY`; sin ellas no se envía
 nada y el pago se registra igual. Solo avisa cuando el pago pasa a `pagado` y
 no estaba ya registrado como tal, así que los reintentos de Stripe no repiten
 el mensaje.
+
+## El panel de Yadira
+
+`/panel` es donde ella ve a sus clientas: quién pagó, qué reto, presencial o
+en línea, cuánto, y un botón que abre WhatsApp en el chat de esa persona con
+el mensaje ya escrito. Sale de la tabla `pagos`, así que no hay que
+mantenerlo aparte.
+
+**Se entra sin escribir nada.** El aviso de pago que le llega por WhatsApp
+trae el enlace con la llave (`/panel/entrar?k=…`); esa ruta la canjea por una
+cookie de seis meses y la manda al panel con la URL limpia, para que la llave
+no quede en su historial ni en lo que comparta. Sin llave ni cookie, `/panel`
+responde 404: no se confirma siquiera que exista.
+
+La llave es `PANEL_LLAVE`. Cambiarla en Vercel revoca todos los accesos
+anteriores, que es el botón de pánico si algún día se filtra el enlace.
