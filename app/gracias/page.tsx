@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/secciones/footer";
 import { Header } from "@/components/secciones/header";
 import { Boton } from "@/components/ui/boton";
+import { estadoGracias } from "@/lib/pagos";
 import { site, whatsappUrl } from "@/lib/site";
 import { getStripe } from "@/lib/stripe";
 
@@ -21,15 +22,42 @@ export default async function GraciasPage({
 
   let session;
   try {
-    session = await getStripe().checkout.sessions.retrieve(session_id);
+    // El payment_intent expandido es lo que dice si quedó una ficha de OXXO
+    // pendiente y dónde está; sin él solo sabríamos que "no ha pagado".
+    session = await getStripe().checkout.sessions.retrieve(session_id, {
+      expand: ["payment_intent"],
+    });
   } catch {
     notFound();
   }
 
-  // Con SPEI la sesión se completa antes de que llegue el dinero: el estado
-  // real lo dice payment_status, no el hecho de haber llegado a esta página.
-  const pagado = session.payment_status === "paid";
+  const estado = estadoGracias(session);
   const nombre = session.customer_details?.name ?? "";
+
+  const textos = {
+    pagado: {
+      eyebrow: "Pago confirmado",
+      cuerpo:
+        "Ya quedó. Escríbele a Yadira por WhatsApp para agendar tu evaluación y arrancar tu reto.",
+    },
+    oxxo: {
+      eyebrow: "Falta un paso",
+      cuerpo:
+        "Tu ficha ya está lista: llévala a cualquier OXXO y paga en caja. En cuanto la tienda reporte el pago, tu cupo queda asegurado y Yadira te escribe. Guarda la ficha, la vas a necesitar.",
+    },
+    transferencia: {
+      eyebrow: "Pago en proceso",
+      cuerpo:
+        "Sigue las instrucciones de transferencia que te dio Stripe. En cuanto tu banco confirme el envío, tu cupo queda asegurado y Yadira te escribe.",
+    },
+    pendiente: {
+      eyebrow: "Pago en proceso",
+      cuerpo:
+        "Tu pago se está confirmando. En cuanto quede, tu cupo está asegurado y Yadira te escribe por WhatsApp.",
+    },
+  }[estado.tipo];
+
+  const pagado = estado.tipo === "pagado";
 
   return (
     <>
@@ -37,27 +65,32 @@ export default async function GraciasPage({
       <main className="mesh-amarillo flex min-h-[70vh] items-center pt-28 pb-16 sm:pt-36">
         <div className="mx-auto w-full max-w-[88rem] px-5 sm:px-8">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-text">
-            {pagado ? "Pago confirmado" : "Pago en proceso"}
+            {textos.eyebrow}
           </p>
           <h1 className="type-display mt-5 max-w-[16ch] text-display text-ink">
             {pagado ? (
               <>
                 Tu cupo está <span className="mark">asegurado</span>
               </>
+            ) : estado.tipo === "oxxo" ? (
+              "Ve a pagar tu ficha"
             ) : (
-              "Estamos esperando tu transferencia"
+              "Estamos confirmando tu pago"
             )}
           </h1>
           <p className="mt-7 max-w-[52ch] text-base leading-relaxed text-ink-muted sm:text-lg">
-            {pagado
-              ? "Ya quedó. Escríbele a Yadira por WhatsApp para agendar tu evaluación y arrancar tu reto."
-              : "En cuanto tu banco confirme la transferencia (normalmente unos minutos), tu cupo queda asegurado y te llega un correo de confirmación."}
+            {textos.cuerpo}
           </p>
-          <div className="mt-9">
+
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            {estado.tipo === "oxxo" && estado.vale && (
+              <Boton href={estado.vale}>Ver mi ficha de pago</Boton>
+            )}
             <Boton
               href={whatsappUrl(
                 `Hola ${site.nombreCorto}, soy ${nombre || "clienta nueva"} y ya ${pagado ? "pagué" : "inicié el pago de"} mi reto. ¿Cómo empezamos?`,
               )}
+              variante={estado.tipo === "oxxo" ? "secundario" : "primario"}
             >
               Escribir a Yadira por WhatsApp
             </Boton>
