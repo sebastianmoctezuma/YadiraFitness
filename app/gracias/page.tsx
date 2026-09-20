@@ -41,7 +41,7 @@ export default async function GraciasPage({
     pagado: {
       eyebrow: "Pago confirmado",
       cuerpo:
-        "Ya quedó. Escríbele a Yadira por WhatsApp para agendar tu evaluación y arrancar tu reto.",
+        "Tu pago se procesó correctamente y tu cupo ya está apartado. Lo que sigue es escribirle a Yadira por WhatsApp: ahí agendan tu evaluación y de ahí salen tu plan de comidas y tu rutina, armados para ti.",
     },
     oxxo: {
       eyebrow: "Falta un paso",
