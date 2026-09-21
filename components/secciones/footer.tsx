@@ -1,13 +1,21 @@
 import Link from "next/link";
+import {
+  IconoFacebook,
+  IconoInstagram,
+  IconoTiktok,
+  IconoWhatsapp,
+} from "@/components/ui/iconos-redes";
 import { Logo } from "@/components/ui/logo";
 import { navegacion, site, whatsappUrl } from "@/lib/site";
 
 const anio = new Date().getFullYear();
 
+/* El icono sustituye al nombre de la red: se reconoce antes de leerse. El
+   usuario se queda porque es el dato que sirve para buscarla. */
 const redes = [
-  { href: site.instagram, red: "Instagram", usuario: site.instagramUsuario },
-  { href: site.tiktok, red: "TikTok", usuario: site.tiktokUsuario },
-  { href: site.facebook, red: "Facebook", usuario: site.facebookUsuario },
+  { href: site.instagram, red: "Instagram", usuario: site.instagramUsuario, Icono: IconoInstagram },
+  { href: site.tiktok, red: "TikTok", usuario: site.tiktokUsuario, Icono: IconoTiktok },
+  { href: site.facebook, red: "Facebook", usuario: site.facebookUsuario, Icono: IconoFacebook },
 ];
 
 export function Footer() {
@@ -55,13 +63,17 @@ export function Footer() {
             Sígueme
           </h2>
           <ul className="mt-5 space-y-2.5 text-sm">
-            {redes.map((red) => (
-              <li key={red.red}>
+            {redes.map(({ href, red, usuario, Icono }) => (
+              <li key={red}>
                 <a
-                  href={red.href}
-                  className="inline-flex min-h-11 items-center text-bg/80 transition-colors hover:text-brand"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${red}: ${usuario}`}
+                  className="inline-flex min-h-11 items-center gap-3 text-bg/80 transition-colors hover:text-brand"
                 >
-                  {red.red} <span className="text-bg/60">{red.usuario}</span>
+                  <Icono />
+                  <span>{usuario}</span>
                 </a>
               </li>
             ))}
@@ -70,9 +82,11 @@ export function Footer() {
                 href={whatsappUrl(
                   `Hola ${site.nombreCorto}, quiero reservar mi cupo.`,
                 )}
-                className="inline-flex min-h-11 items-center text-bg/80 transition-colors hover:text-brand"
+                aria-label="Escribir por WhatsApp"
+                className="inline-flex min-h-11 items-center gap-3 text-bg/80 transition-colors hover:text-brand"
               >
-                WhatsApp
+                <IconoWhatsapp />
+                <span>WhatsApp</span>
               </a>
             </li>
           </ul>
