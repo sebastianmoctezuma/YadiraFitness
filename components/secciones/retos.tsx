@@ -47,6 +47,11 @@ export function Retos() {
                     <h3 className="text-h3 font-bold tracking-[-0.02em] text-ink">
                       {reto.nombre}
                     </h3>
+                    {reto.precioAntes && (
+                      <span className="rounded-full bg-ink px-3 py-1 text-[0.65rem] font-extrabold tracking-[0.1em] text-brand uppercase">
+                        En promoción
+                      </span>
+                    )}
                     {reto.etiqueta && (
                       <span className="rounded-full bg-brand px-3 py-1 text-[0.65rem] font-extrabold tracking-[0.1em] text-ink uppercase">
                         {reto.etiqueta}
@@ -63,8 +68,15 @@ export function Retos() {
 
                 <div className="flex items-center gap-6 sm:flex-col sm:items-end sm:gap-4">
                   {reto.precioMXN && (
-                    <span className="text-lg font-extrabold tracking-[-0.01em] text-ink">
-                      {precioMXN(reto.precioMXN)}
+                    <span className="flex flex-wrap items-baseline gap-2">
+                      {reto.precioAntes && (
+                        <span className="text-sm text-ink-muted line-through">
+                          {precioMXN(reto.precioAntes)}
+                        </span>
+                      )}
+                      <span className="text-lg font-extrabold tracking-[-0.01em] text-ink">
+                        {precioMXN(reto.precioMXN)}
+                      </span>
                     </span>
                   )}
                   {/* Botón de verdad, con liquid glass, y a ancho completo en
