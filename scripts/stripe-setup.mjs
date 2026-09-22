@@ -25,7 +25,7 @@ const RETOS = [
   {
     lookup: "reto-90-dias",
     nombre: "Reto Transformación (90 días)",
-    monto: 650000,
+    monto: 450000,
   },
 ];
 

@@ -18,6 +18,9 @@ export type Reto = {
   /** Precio publicado, en pesos. La fecha de inicio sigue sin definirse y la
       interfaz no muestra nada cuando falta. */
   precioMXN?: number;
+  /** Precio de lista cuando hay promoción: se tacha junto al vigente. Su sola
+      presencia enciende la etiqueta de promoción, sin escribirla a mano. */
+  precioAntes?: number;
   fechaInicio?: string;
   /** Si el botón de pago está disponible; el cierre de cupos hoy es manual. */
   ventaAbierta: boolean;

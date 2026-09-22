@@ -65,6 +65,11 @@ export default async function RetoPage({ params }: Props) {
               <h1 className="type-h2 mt-2 text-h1 text-ink">{reto.nombre}</h1>
 
               <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-semibold tracking-[0.1em] text-ink-muted uppercase">
+                {reto.precioAntes && (
+                  <span className="rounded-full bg-ink px-3 py-1 text-brand">
+                    En promoción
+                  </span>
+                )}
                 {reto.etiqueta && (
                   <span className="rounded-full bg-brand px-3 py-1 text-ink">
                     {reto.etiqueta}
@@ -111,8 +116,15 @@ export default async function RetoPage({ params }: Props) {
                   Reserva tu cupo
                 </h2>
                 {reto.precioMXN && (
-                  <p className="mt-2 text-3xl font-extrabold tracking-[-0.02em] text-ink">
-                    {precioMXN(reto.precioMXN)}
+                  <p className="mt-2 flex flex-wrap items-baseline gap-2.5">
+                    <span className="text-3xl font-extrabold tracking-[-0.02em] text-ink">
+                      {precioMXN(reto.precioMXN)}
+                    </span>
+                    {reto.precioAntes && (
+                      <span className="text-base text-ink-muted line-through">
+                        {precioMXN(reto.precioAntes)}
+                      </span>
+                    )}
                   </p>
                 )}
                 <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-muted">
